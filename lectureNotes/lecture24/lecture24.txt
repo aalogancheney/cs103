@@ -1,0 +1,76 @@
+CSCI 103: Lecture 24 11/17
+
+BFS Algorithm:
+
+- Going to need this for PA 5
+- Breadth First Search algorithm
+- We have already done this in our maze-searching algorithm.
+- Now we want to implement this algorithm with respect to our social network.
+- ...Could this be a "6 degrees of separation" PA?
+- The goal in this algorithm is to mark each person in the social network with
+  some distance from an initial user. There is no stopping case, we just want
+  to mark all of the users. 
+  - There is still a possibility of having users that are not connected to
+    another user, which will happen if there are cliques within the network
+    that are not connected to the rest of the network. 
+- Add a "depth" and "predecessor" field to the User class. 
+- We should use a deque
+- Continue processing the deque while it is not empty.
+
+Disjoint Sets:
+
+- The second part to PA5 is to find the number of disjoint sets of friends. 
+- This can be done by performing a BFS algorithm, checking if there are
+  remaining nodes with depth -1, and then start searching from there. 
+- Maybe add another field to the User class to say which set they belong to. 
+- Iterate over all users, and if they are not part of a set, then perform a 
+  BFS over that set. 
+- This will find all of the disjoint sets of users. 
+
+Friends Suggestions:
+
+- This is the third, and last, part of PA5. 
+- We want to suggest friends to users that are AT MOST a distance of 2 away 
+  from you. 
+- We want to rank friend suggestions based on the number of friends you have
+  in common with someone. Then we suggest those friends based on who has the 
+  most suggestions. 
+- We want to show the suggestion that has the highest score. If there are 
+  multiple people with the same score, we need to output all of those people. 
+  
+Helper Function:
+
+- If we have a case where we want to do recursion, but we need more arguments 
+  than the user needs, we can make a helper function that is used to call the
+  actual function that is going to do the recursion. This gives the user a nice
+  neat interface, but the actual work gets done in the other function.
+  
+Recall Recursive Flood-Fill on a 2D array:
+
+- We wanted to make a program that fills an array. We did this with recursion
+  a few weeks ago.
+  
+DFS (Depth First Search):
+
+DFS-Visit (G, u)
+  u.color = GRAY
+  for each vertex v in Adj(u) do
+    if v.color = WHITE then
+      DFS-Visit (G, v)
+  u.color = BLACK
+  finish_list.append(u)
+  
+- The deepest members in the graph are found first. In this way, if we are 
+  looking for disjoint sets, we can use BFS or DFS algorithms to accomplish 
+  this task.
+
+BFS vs. DFS:
+
+- Memory Benefits of DFS:
+- The following considers a graph where each vertex has two new neighbors. 
+  - Consider performing a BFS and then a DFS from the root.
+    - How many verticies are you keeping track of at any point in time
+      (either in your BFS queue of DFS stack/recirsive calls)
+    - BFS would yield an entire level
+      - Notice at level h, you would have 2^(h-1) nodes. 
+    - DFS only tracks the depth which is just h.

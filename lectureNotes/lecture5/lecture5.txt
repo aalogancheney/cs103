@@ -1,0 +1,77 @@
+CSCI 103: Lecture 5
+
+break and continue:
+
+- break: Ends the current loop (this is not an if statement -- it is always executed).
+- continue: Begins the next iteration of the nearest loop (performing the update statements if 
+  it is a for loop).
+	- This can usually be accomplished with an if else statement
+	- Can be useful with many nested if statements...
+	- Try to avoid using the continue and break statements. We can accomplish our goals
+	  in other ways.
+- The break statement only quits the current loop when we are considering nested loops. This
+  is one of the problems associated with the break statement, and the continue statement. 
+
+rand() and RAND_MAX
+
+- These are in the cstdlib library. 
+- The function rand() will generate a pseudo-random number. 
+- the result of rand() is an integer, so if we want to scale the results down to a particular
+  range of values, we have to cast at least one of the divisors to a double to account for 
+  this, since the most typical case will result in an answer of 0. 
+- The problem with random is that computers are terrible at doing things randomly. To fix
+  this problem, we use a technique called seeding. 
+	- We use the function srand(), which has a single integer argument, and determines 
+	  where we start in the list of pseudo random numbers. 
+	- This means that we need to use a different seed each time we run the program, and 
+	  one thing that is constantly changing is time. We use the time() function to 
+	  achieve our goal.
+	- We use srand() once, and call rand() a bunch of times. 
+
+gdb Debugger:
+
+- Look for the gdb debugger in the lab this week...
+- The three things we have to do:
+	- Create a break point at a particular line. 
+	- Step through the program using the "next" command.
+	- Print variable values. 
+
+Arrays:
+
+- Why do we need arrays?
+	- If we want to keep track of 100 different numbers, we could initialize 100 different
+	  variables... but this is tedious, unnecessary, and time consuming. And if we have
+	  to change the code in any way, we have to change the whole thing. This is where 
+	  arrays come in handy
+- An array is an ordered collection of variables of the same type.
+- A collection is referred to with one name.
+- Individual elements are referred to by an offset/index from the start of the array. The first
+  element is the 0th element. 
+- The syntax is:
+
+	int data[20];
+
+- A formal definition: A statically-sized, contiguously allocated collection of homogenous 
+  data elements.
+	- Collection of homogenous data elements
+		- Multiple variables of the same data type
+	- Contiguously allocated in memory
+		- One right after the next element
+	- Statically-sized
+		- Size of the collection can't be changed after the initial compile of the 
+		  program.
+- The most useful application for the array is to use it with loops and fill/read/change
+  the values.
+
+Algorithms:
+
+- Algorithms are at the heart of computer systems, both hardware and software. It is the job
+  of the programmer/hardware designer to make algorithms that are efficient. 
+- Computers cannot handle ambiguity well, so as designers we have to make sure that our 
+  programs make sense to the computer and can be executed in an efficient way. 
+- Make algorithms as efficient as possible, and we care about faster results. 
+
+Indentation:
+
+- Run astyle fileName.cpp to format any file nicely!
+

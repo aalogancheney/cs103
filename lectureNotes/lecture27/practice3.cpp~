@@ -1,0 +1,30 @@
+#include <iostream>
+
+using namespace std;
+
+class Change {
+  public:
+    Change(int total);
+    int getQuarters();
+    int getDimes();
+    int getPennies();
+    string getString();
+    void addChange(Change &otherAmmount);
+  private:
+    int _quarters;
+    int _dimes;
+    int _pennies;
+}
+
+Change::Change(int total) {
+  _quarters = total / 25;
+  total %= 25;
+  _dimes = total / 10;
+  _pennies = total % 10;
+}
+
+int main(int argc, char *argv[]) {
+  
+
+  return 0;
+}

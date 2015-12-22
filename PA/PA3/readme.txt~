@@ -1,0 +1,62 @@
+CSCI 103 Programming Assignment 3, Path-so-logical, Fall 2014
+
+Name: Aaron Cheney
+
+Email Address: acheney@usc.edu
+
+NOTE: You can delete the questions, we only need your responses.
+
+=============================== Prelab =======================================
+
+1. I will use a dynamically allocated 2D array of boolean values to keep
+   track of where I have visited. I will use the following declaration:
+   
+   bool **visitedLocations = new bool*[rows];
+   for(int i = 0; i < rows; i++) {
+     *(visitedLocations + i) = new bool[cols];
+     for(int j = 0; j < cols; j++) {
+       *(*(visitedLocations + i) + j) = false;
+     }
+   }
+   
+   The reason I am using the type boolean is to take up less memory, since I
+   only care about whether or not I have visited a particular location, which
+   is a binary question.
+
+2. I mark a cell as visited the moment after I check that it is within the 
+   range of the maze. It doesn't matter if the element is a space, a wall, or
+   the finish line, you have visited it. The code immediately after this will
+   look to see what exactly is in that space, and then take appropriate action.
+
+================================== Review ===================================
+
+1. My mymaze.txt file is a 10x10 array of mostly blank spaces (i.e. '.'). The
+   starting position is in the upper-left corner of the maze, and the finish
+   is located in the lower-right corner of the maze. There are a few walls near
+   the finish of the maze, as well as a few randomly placed within the middle
+   of the maze, but everything else is left as explrable space. This guarantees
+   that there are many paths to the finish line, and there are several 
+   optimal solutions.
+   
+   My program behaves just as I would expect it to: it finds a shortest path 
+   and stops as soon as it finds that path -- it doesn't care if there is 
+   another path of the same length.
+
+================================ Remarks ====================================
+
+Filling in anything here is OPTIONAL.
+
+Approximately how long did you spend on this assignment?
+
+: About 4 hours.
+
+Were there any specific problems you encountered? This is especially useful to
+know if you turned it in incomplete.
+
+: No.
+
+Do you have any other remarks?
+
+: Implementing the program using recursion and pointers was an extremely
+  helpful exercise. Although the assignment did not call for these 
+  properties, it certainly helped solidify the concepts. 

@@ -1,0 +1,12 @@
+CSCI 103: Lecture 13 10/8
+
+Text File I/O:
+
+- Use ifstream object/variable for reading a file, which can do anything cin can do
+- Use ofstream object/variable for writing a file, which can do anything cout can do
+- Must include <fstream> (file stream)
+- Use << and >> operators on the stream, but knowing that the operations are going to be
+  working on files rather than input from the user on the keyboard. 
+- Usually, we want to check and make sure if we are reading/writing information 
+  correctly, and we can use the fail() member function to check if it succeeds or fails. 
+- Always remember to close a file stream using the close() member function. 

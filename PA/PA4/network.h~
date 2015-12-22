@@ -1,0 +1,27 @@
+#ifndef NETWORK_H
+#define NETWORK_H
+#include "user.h"
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Network {
+  public:
+    Network();
+    ~Network();
+    int read_friends(char *fileNameIn);
+    int write_friends(char *fileNameOut);
+    void add_user(string name, int birthyear, int zipcode);
+    int add_connection(int idOne, int idTwo);
+    int remove_connection(int idOne, int idTwo);
+    int get_id(string name);
+    vector<User *> get_users();
+    void print_user(int id);
+  private:
+    vector<User *> _users;  // Each user is dynamically allocated
+    int largestID;  // This keeps track of the largest id in the network
+                    // and is used for assigning new ids. 
+};
+
+#endif

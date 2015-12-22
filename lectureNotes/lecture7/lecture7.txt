@@ -1,0 +1,78 @@
+CSCI 103: Lecture 7 9/17
+
+More Function Call Sequencing and Local Variables:
+
+- As one function calls another, they execute in a last-in, first-out fashion (i.e. the last 
+  one called is the first one to finish and return).
+- This is just like in a cafeteria, where the last plate put on the top of the stack is the 
+  first one to be pulled off (always accessing the top item).
+- How does the computer actually track where to return to when a function completes? The 
+  computer internally keeps track of the order of functions that are called on the stack. As 
+  parts of the stack become unnecessary, the memory is reclaimed and the information that
+  was in that function is now lost. This is how local variables work and why the die at the
+  end of a function. When main() ends, it follows a link back to the OS.
+
+Scope:
+
+- Global variables live as long as the program is running.
+- Variables declared in a block {...} are local to that block. This means that there can be
+  local variables inside a while loop, a for loop, an if statement, etc. 
+- When variables share the same name the closest declaration will be used by default. 
+
+Pass By Value:
+
+- This means that arguments are passed to a function with a copy of that variable. 
+- When we pass a variable to a function, that function will work with a copy of the original
+  variable, which means the original variable is unchanged. 
+
+Arrays -- A Review:
+
+- A statically-sized, contiguously allocated collection of homogenous data elements.
+- In other words, the size of the array must be known at compile time, the data is located
+  in memory sequentially, and every element in an array is of the same type. 
+
+Static Size/Allocation:
+
+- For now, arrays must be declared as fixed sizes (i.e. a constant known at compile time).
+- We can either hard-code the number in, or use a constant value to define the size of an
+  array. 
+
+Initializing Arrays:
+
+- Integers or floating point types can be initialized by placing a comma separated list of 
+  values in curly braces {...}.
+- If accompanied with the initialization list, size doesn't have to be indicated and we can 
+  leave the braces empty. 
+- It is possible to access elements past the size of the array, and the computer will let
+  us get into trouble this way. 
+
+Arrays as Arguments:
+
+- In a function declaration / prototype for the formal parameter, use type[] or type *.
+- When calling the function, simply provide the name of the array as the actual argument. The
+  name of an array translates to the address of the first element of the array. 
+- C does NOT implicitly keep track of the size of the array. This means that we either need
+  to have the function only accept arrays of a certain size, or we need to pass the size
+  of the array as another argument. 
+- Arrays are always passed by reference. 
+
+C Strings:
+
+- Character arrays (i.e. C strings)
+- Enclosed in double quotes ""
+- Strings of text are simply arrays of chars
+- Can be initialized with a normal C string (in double quotes)
+- C strings have one-byte (char) per character.
+- End with a null character == 00 dec == \0 ASCII
+- cout knows that if a char array is provided as an argument it will print the 0th character
+  and keep printing characters until a \0 character is encountered.
+- cin knows how to take in a string and fill in a char array (it stops at a whitespace). It 
+  will write beyond the end of an array if the user enters a string that is too long. 
+
+Multidimensional Arrays:
+
+- Arrays so far have been thought of as 1-dimensional sets. Often, however, we need to view 
+  our data as 3-dimensional or 2-dimensional arrays.
+- These are declared with multiple indices, as in int matrix[2][3]; 
+- The same can be done for higher dimensions, and it is up to the programmer to decide how
+  to interpret the data. 

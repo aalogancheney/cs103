@@ -1,0 +1,562 @@
+CSCI 103: Midterm Review Notes:
+
+Pointers and Dynamic Memory Worksheet:
+
+1. Declare a local variable, p, that is a pointer to an int.
+      int *p;
+
+2. Make p point to an int named x (that was already declared earlier).
+      p = &x;
+
+3. Show how you would call this function: void f1(int *ptr) and pass p as the argument.
+      f1(p);
+
+4. Assuming you're in void f1(int *ptr) change x's value to 7.
+      *ptr = 7;
+
+5. Make the pointer p point to a single, new dynamically allocated int.
+      p = new int;
+
+6. Declare a pointer, q, to a double and make it point to a dynamically allocated array
+   of 10 doubles.
+     double *q = new double[10];
+
+7. Set the 5th double to 0 in the array pointed to by q.
+     *(q + 4) = 0;
+
+8. Declare a pointer, r, that points to a dynamically allocated array of 5 integer pointers.
+     int **r = new int *[5];
+
+9. Make the 0th pointer in r point to a dynamically allocated array of 8 integers.
+      r = new int[8];
+
+10. Make the 1st pointer in r point to the integer that p is pointing at.
+     *(r + 1) = p;
+
+11. Statically allocate an array called s of 6 pointers to character arrays.
+     char *s[6]; 
+
+12. Dynamically allocate a character array that can hold a string of 10 good characters
+    and have the last pointer in the s array point to it.
+      s[5] = new char[11];
+
+13. Declare a statically allocated character array, t, that contains the words "CS103 Yea!"
+     char t[] = "CS103 Yea!";
+
+14. Copy the string in t to the string that the last pointer in s points to.
+     strcpy(s + 5, t);
+
+15. With several statements deallocate all the memory that the s array consumes and 
+    points at. 
+     delete [] *(s + 5); 
+
+Book Notes:
+
+Chapter 2:
+
+1. Data Types: int, char, double, boolean
+
+  int: takes 4 bytes of memory in most typical systems, and is meant to hold
+       numbers without fractional parts. If a fractional part is assigned it
+       gets truncated. 
+  char: takes 1 byte and is used to hold an integer value. This is typically
+        used to hold information about character representations, so that 
+        when output to the screen they show a character, not a number.
+  double: These take 8 bytes of memory and are used to hold numbers with 
+          fractional parts. When promoting numbers to a double, they 
+          automatically get the .0 attached to the end. The tradeoff with these
+          is that they give a higher amount of accuracy, but take more space
+          and calculations performed on them are much more complex than simple
+          arithmetic operations on integers. 
+  boolean: holds 1 byte of information and is used in C++ to signify if 
+           something is true or false. In C++, 0 means false and any non-zero
+           number means true. It is also important to note that every C++
+           statement evaluates to some value, and that value can be used 
+           wherever a boolean variable is expected. 
+
+2. Casting
+
+  Sometimes we put the right information into the wrong variable type, such
+  as int x = 4.5;. In this case, the value stored in x would be 4 and the 
+  fractional part is lost. We can implicitly or explicitly do casts for types,
+  meaning the code will automatically promote/truncate values, or we can do
+  it ourselves. This can be done by adding a .0 to a number, or with a 
+  static_cast<> command, or by including the desired type in parentheses 
+  before the number we want it to act on.
+
+3. Variables
+
+  These are storage bins for information. Essentially, the only difference 
+  between variable is how much information is stored and what type of 
+  information is stored. Based on that, C++ will act on variables differently,
+  such as outputting a character vs. an integer. There are many things we can
+  store in C++ and it is advantageous to use them to their best potential.
+
+4. Operators
+
+  There are many operators in C++ that we can use to perform operations on our
+  data. Here are a few:
+    +: arithmetic
+    -: subtraction
+    *: multiplication
+    /: division (integer or floating-point)
+    %: modulus (remainder)
+    ++: increment
+    --: decrement
+    =: assignment operator (different from comparison operators)
+    ==: check to see if two values are the same
+    >=, >, <=, <: greater than or equal, greater than, less than or equal, less
+                  than (respectively)
+    !=: not equal
+    &&: logical AND
+    ||: logical OR
+    !: logical NOT
+    ?:: conditional operator
+
+  Each of these operators has a precedence, meaning they will execute in a 
+  certain order. It is important to know which operator will execute first, but
+  when in doubt use parentheses. 
+
+5. Expressions
+
+  Most everything in C++ is an expression (or some subpart of it is an
+  expression). 5 + 6 is an expression, and int x = 6 + 5 is a statement, with
+  an assignment operator, initialization, and an expression that gets evaluated
+  on the right of the assignment operator. Each expression has a value, and 
+  this value can be used in place of a Boolean variable (see above).
+
+6. Assignment and Compound Assignment:
+
+  The = operator is the assignment operator, and it assigns the expression
+  on the right hand side to the variable on the left hand side. It always
+  works this way, so saying 5 = x is not a valid assignment statement. 
+  Similarily we cannot have expressions on both sides of the operator, so 
+  x + 5 = 4 * 9 is not a valid use since the left hand side of the assignment
+  operator is itself an expression. 
+
+  The compound assignment operators (+=, -=, *=, /=) give us a way to 
+  use shorthand. We can write x = x + 5 as x += 5 and we get the same thing.
+  This is used when we want to change a variable by a set amount and update
+  that variable. Extremely useful.
+
+7. Basic I/O with cin and cout.
+
+  The objects cin and cout are used for input and output, respectively. They
+  use input and output streams to get information from the user via 
+  the keyboard and output information to the display, respectively. They are
+  used with the extraction and insertion operators (>> and <<, respectively).
+  The objects can only read one thing at a time and will get "clogged" if
+  the incorrect information is put into the stream. This means it is up to the
+  programmer to make sure the information coming into the program is correct.
+
+8. Built-in functions: sqrt(), pow(), min(), max(), abs()
+
+  sqrt() has one argument of type double, and returns a double that is the
+  square root of the argument.
+  pow() has two arguments, the first is the base, and the second the power,
+  and it returns the result.
+  min() and max() take two numbers and determine the minimum or maximum
+  and give that back as the result. 
+  abs() has one argument and returns the absolute value of that argument.
+
+Chapter 3:
+
+1. if, else
+
+  This is a very useful construction that can be used to check if something
+  is true or not. The inside of an if statement evaluates to a value and if
+  that value is non-zero the body will execute, otherwise it will not. An
+  example follows;
+
+    if(x && y) {code}
+
+  which will execute the code if both x and y are non-zero. This can be
+  chained together with the else statement to get code that follows this
+  format:
+
+  if() {}
+  else if() {}
+  else if() {}
+  else {}
+
+  It is important to include a default behavior with the final else block
+  of code, or to make sure that everything fits. This is good style and it
+  makes code much easier to read. Another consideration is that only one
+  of the blocks of code will execute, so as soon as one is encountered the
+  others will not be reached. So, it is important to make sure that the 
+  right cases are ordered so that the appropriate branch is reached. 
+
+Chapter 4:
+
+1. for, while
+
+  These two loops are used to repeat a process many times over so that we 
+  don't have to write code to do it each time. They are useful in different
+  situations: the for loop is good when we know the exact number of times
+  we want our code to execute, and the while loop is used to execute a 
+  certain number of times until a condition is reached. They have the 
+  following structures:
+
+  for(initialization; check; update) {}
+  while(condition) {}
+
+  Each loop can be made into the other, although they should only be used
+  in their designated cases. In the for loop, the initialization only 
+  occurs once, then the check is checked, and if it passes the body is 
+  executed. After that, the update is performed and the cycle is complete. 
+  The body of the while loop will execute only if the condition is true,
+  otherwise it will not execute. 
+  
+2. break, continue
+
+  These statements are used to manipulate our loop behavior. The break 
+  statement is used to eject out of a loop immediately. The continue
+  statement is used to finish the current body of a loop and start on
+  the next iteration through. Although these are useful constructs, 
+  everything should and can be done without them. 
+
+3. rand, srand, RAND_MAX
+
+  The function rand() will give a random integer from 0 to RAND_MAX, a 
+  constant within the system you are working with. The way this is done,
+  however, is by consulting a list of non-repeating integers and returning
+  them in sequential order each time rand() is called. This presents a 
+  problem because the same code run on different machines will use the 
+  same random numbers, which isn't really random. To fix this, we can use
+  the srand() function to seed random to start at some point in this list 
+  of numbers. The best way to do this is use time(0) to indicate the time
+  NOW to seed random, which will give the most random behavior. 
+
+  If we want to use a particular range of random numbers it is best to use
+  the modulus operator to achieve this. Also, we should only use srand()
+  once per program call, at the beginning of main. 
+
+Chapter 5:
+
+1. Declaring, defining and calling functions
+
+  To declare a function we need to tell the program what to expect. If there
+  is no agreed upon definition for that function then the program cannot
+  work. In other words, the program needs to know the behavior of all 
+  functions at compile time. 
+
+  Every function has a return value (which could be void) and takes arguments
+  (again, which could be void). There can only be one return value, but
+  there can be many arguments. The general format for declaring a function
+  is as follows:
+
+    returnType functionName(argument1Type argument1, argument2Type, argument2
+      ...) {};
+
+  To define a function within the body of the function we have to work with
+  the formal parameters as defined in the function declaration. Then we 
+  can work on the information given to the function. But it is important to
+  note that we are working with copies of the information most of the time
+  (i.e. passing by value) which means we cannot directly influence 
+  information in the main() function. This can be accounted for with the 
+  return statement giving back the desired information. Later we will see
+  how pointers can also make this easier. 
+
+  To call a function we have to pass it the right arguments, because if
+  we don't then the program will not know how what that function is. The
+  signature of the function defines how it works, and if there is no
+  signature for that function call the program will not compile.
+
+2. return, void
+
+  The return command will eject from the current function. At the end of
+  main() this means we go back to the operating system. At the end of our
+  user-defined function this means we go back to main (or whatever the
+  calling function was). The return statement is also used to get information 
+  from a function into the calling function by giving back a value. The
+  value that is returned is based on the type in the declaration.
+
+  The void type means that the function does not use any type of info. In
+  the return value, this means the function does not return anything to
+  the calling function. In the function parameter list this means that the
+  function does not take any arguments. Basically, this means that the
+  function will interact with things or do a set task, like display 
+  information. Calculation based programs will generally not use this 
+  type in the parameter list, but when working with pointers the return
+  type may very well be void. 
+
+3. Scope
+
+  This is the whole purpose of functions, they allow us to scope our work
+  and consider small parts of the problem instead of the whole problem.
+  We may be concerned with a very large software development project, but
+  we can scope the work by breaking it down into smaller, easier to 
+  implement chunks without worrying about how the rest of the program
+  is going to work. 
+
+4. Pass-by-value
+
+  This idea refers to regular function parameters, and this means that when
+  we pass information to a function that is stored in a regular variable 
+  we are passing a COPY of the information, not the information itself.   
+  Thus, if we want to see our work in the calling function we have to 
+  return the appropriate type of information to the program, or use  
+  pointers to manipulate data directly. 
+
+Chapter 6:
+
+1. Defining Arrays
+
+  Arrays are defined with bracket notation. We still include the type of
+  the variable to be stored in the array, but now we include brackets
+  to indicate we are making an array. The general declaration is as follows:
+
+  variableType arrayName[sizeOfArray];
+
+  The size of the array must be known at compile time (except for dynamically
+  allocated arrays) otherwise this does not work.
+
+  We acces information from arrays using bracket notation (or pointer
+  notation) where the first element is actually element 0.  
+
+2. Functions of Arrays
+  
+  Recall that earlier we said the name of an array is the start address of that
+  array, so when we pass an array as an argument to a function we are actually
+  passing a pointer to that function, which means that we can use pointer notation
+  when prototyping our function (and in fact we should). 
+
+  This means that we are not working with a copy of the information, but THE
+  actual information at that address. Just as we do pointer arithmetic or
+  array indexing, we can use that within the function to access the different
+  elements of the array. 
+
+3. Multi-Dimensional Arrays
+
+  Declaring multiple dimensional arrays is much like single dimensional 
+  arrays, but we just have multiple brakets to indicate the size of the  
+  array in different dimensions. Since the array name corresponds to the starting
+  address of an array, and all we do is use that as a reference to the information
+  stored in the array, we have to do some special things when declaring these
+  arrays or using them in functions. When declaring them, just like with normal
+  one-dimensional arrays, we have to specify their size at run-time. When using
+  them as arguments to a function, when we prototype the function we have to 
+  give all of the dimensions except the top-most layer (although that is optional,
+  not prohibited). The reason for this is because the only information we have
+  about the array is its starting address. Normally we do pointer arithmetic based
+  on the type of data stored in the array, to get to the different elements. But 
+  if we have an array of multiple dimensions we have to know where it is all 
+  relative to the beginning of the array, hence why we have to have all of the 
+  dimensions except for the top-most layer. 
+
+  It is also important to note that we can use the array however we want, i.e. the
+  first index does not have to correspond to the rows -- it can be whatever we
+  want it to be -- so long as we keep track of what data we are accessing and
+  what convention we are using. 
+
+  For an array as follows, we can come up with a way of accessing the information:
+
+  int x[10][12][4];
+
+    Here, we think of the elements as element ijk (for each position). To find where
+    the information is stored, let's first define what each dimension is:
+
+    NUMP = 10, NUMC = 12, NUMR = 4.
+
+    Then we can find where the elements live by the following:
+
+    location = start address + 4 * (i * NUMC * NUMR + j * NUMR + k),
+
+    which doesn't depend on NUMP, hence why we don't have to specify the dimension
+    of the highest order when declaring functions that handle multi-dimensional 
+    arrays. 
+
+Chapter 7:
+
+1. Declaring Pointer Variables
+
+  This is done in much the same way as declaring regular variables, but we now have
+  to include the * in our declaration. To declare different pointers, we do the
+  following:
+
+    pointer to an int: int *x;
+    pointer to a double: double *y;
+    pointer to a pointer to an int: int **z;
+
+  Each * denotes a pointer, and we still have to specify the type of information the
+  pointer points toward. This is how C++ takes care of knowing what it is pointing
+  toward and if you want to change the information located there it will know 
+  whether or not you are doing a valid operation. 
+
+2. Referencing and Dereferencing
+
+  If we have a typical variable declared normally (int, double, etc.) then we can
+  get the address of that variable by using the reference operator (&) placed in  
+  front of the variable, such as &x, which will give us the address of the variable
+  x. If we have a pointer to a variable, such as int *y = &x, then we can use the
+  dereferencing operator on y to access the value in x, such as in *y = 7, which 
+  will change the value of the information stored in x to 7. Each * placed in front
+  of a pointer takes away one layer of indirection, so if we have a variable of 
+  type int **z, then *z is a pointer to an integer, **z is the value of the integer
+  that *z points to, and z is a pointer to *z. 
+
+  The power of this is that now we don't have to pass-by-value to functions if we 
+  include pointers in their declaration. Suppose we have the following:
+
+  int x = 10;
+  int *y = &x;
+
+  void function(int *ptr) {
+    *ptr = 12;
+  }
+
+  then we could say function(&x) to change the value of x to 12, or we could pass
+  the variable y directly as in function(y), since y is of the right type and it
+  points to the right thing. 
+
+  Problems arise when we have pointers that do not point to anything. It is entirely
+  possible to declare a pointer without initializing it, just as we could declare an
+  integer or double without initializing it, and it will point to garbage. We have
+  no idea what it will point at, so it is best practice to initialize a pointer as
+  soon as possible (just like with regular variables). 
+
+3. Pointer Arithmetic
+
+  Pointer arithmetic lets us access the different elements of an array using the 
+  name of the array (since the name of an array is the starting address of that
+  array). Pointer arithmetic is assumed by C++ when done in the right context,
+  so all we have to do is use the addition operator. Recall that arrays store
+  information contiguously (meaning that they are stored next to each other in
+  memory) and we use the size of the information in the array to decide where to 
+  go to get the information. If we have an array of int, then each element is 
+  separated by 4 bytes; doubles 8; chars 1; etc. Thus if arrayName is the name of
+  an array, arrayName + 1 is the address of the second element. To get the value
+  we have to dereference that address, but we also have to be careful with 
+  parentheses, because *(arrayName + 1) is different from *arrayName + 1. In the 
+  first case, we get the right result, but in the second case we are getting the 
+  value stored in the first element of the array and adding 1 to is (which by itself
+  does nothing and C++ execute a statement that does nothing). 
+
+4. C-Strings (Null-Terminated Character Arrays)
+
+  In the C language, a string of text is represented with a character array that
+  terminates with the null character \0. This way, cout knows how to handle the
+  string when it tries to output it to the screen. The other side of this is that
+  we have to account for the null character when we create arrays of char, so that
+  our program doesn't run on into garbage. 
+
+5. Built-in functions: strlen(), strcpy(), strncpy(), strcmp().
+
+  strlen(): size_t strlen(const char *str);
+            Takes a pointer to a character array and returns the length of that
+            string of characters, without the null character attached. Therefore
+            if we want to copy that string to another character array we have to
+            declare another array of size strlen() + 1 to account for a null 
+            character. 
+  strcpy(): char * strcpy(char *destination, const char *source);
+            Takes two pointers to character arrays (the second of which cannot be 
+            altered), copies the second array into the first including the null 
+            character, and returns destination.
+  strncpy(): char * strncpy(char *destination, const char *source, size_t num);
+             Takes three parameters: the destination array, the source array, and
+             the number of elements to be copied. This last parameter protects us 
+             from writing over the edge of the destination array. There is no
+             null character that gets attached to the end of the destination array  
+             implicitly, so we should be sure there is a null character. If the
+             end of the source array is reached before the num argument, then the
+             destination array will be padded with 0's.
+  strcmp(): int strcmp(const char *string1, const char *string2);
+            Takes two constant parameters and checks character-by-character if the
+            two arrays are the same. The return value is 0 if the check yielded 
+            a match, a negative number if the first mismatched character has a 
+            lower value in string1 than in string2, and positive for the opposite.
+            The return of 0 usually indicates success, so we should use !strcmp()
+            most of the time.
+             
+6. Array of Pointers
+
+  An array of pointers is not unusual, it is just as it sounds. We can use the same
+  pointer arithmetic and bracket notation to get to the different elements, although
+  each element itself is going to be a pointer, which means that we have to use
+  a few dereferencing operators (depending on the level of indirection). 
+
+7. Command-Line Arguments
+
+  When declaring the main() function, it actually has formal parameters that can be
+  used within our program. The full declaration of main is as follows:
+
+    int main(int argc, char *argv[]) {}
+
+  The first argument is the number of commands entered at the command terminal,  
+  which is always going to be 1 since it holds the name of the program that was
+  executed. The second argument is an array of char *, or a char**, that stores
+  the different commands entered at the terminal. 
+
+8. Deep vs. Shallow Copies. 
+
+  A shallow copy creates a set of pointers that point to the same thing, whereas 
+  a deep copy will make a duplication of the information for a new set of 
+  calculations. 
+
+9. new and delete
+
+  new and delete are ways of dynamically allocating memory for the user to use at
+  run time. The power of this is that the program takes up as little space as
+  possible. To declare a new int, we would do the following:
+
+    int *ptr1 = new int;
+
+  The return type from new is a pointer to the type of data that was created
+  dynamically. Thus, if we create an array of int, we would have
+
+    int *ptr2 = new int[SIZE];
+
+  And if we had an array of pointers to int, then we would have:
+  
+    int **ptr3 = new int*[SIZE];
+
+  This dynamic memory exists on the heap, whereas statically allocated memory lives
+  on the stack. When we are finished using the memory, we have to reclaim the space
+  with the delete command. To do this, we would have to do the following for the 
+  three examples from above:
+
+    delete ptr1;
+    delete [] ptr2;
+    delete [] ptr3; 
+
+  The brackets indicate that part of the memory we created was an array. With 
+  dynamically allocated memory, we can get into trouble if we make our pointer
+  point to something else. Consider the following:
+
+    ptr1 = new int;
+
+  What is the address of the data that ptr1 originally pointed to? No one knows,
+  so we cannot delete that memory, and we have caused a huge problem. Once we 
+  have assigned a dynamically allocated space of memory, we should not have it 
+  point to something else, unles we have performed a deep copy on that information
+  or unless we have deleted the memory and we are ok with having the pointer 
+  point to something else. 
+
+10. Built-In Functions: atoi() and atof()
+
+  These functions take command line arguments and convert their ASCII character
+  representation to the appropriate value, either integer or double, depending
+  on the function call we use from above. Notice that the atof() function does
+  not convert ASCII to a type float, but to a type double.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+	cout << "Please enter an integer: ";
+	int integer;
+	cin >> integer;
+
+	int counter = 0;
+
+	while(integer / 10) {
+		cout << "The " << pow(10, counter) << "'s digit is ";
+		int digit = integer % 10;
+		cout << digit << endl;
+		
+		counter++;
+		integer /= 10;
+	}
+
+	cout << "The " << pow(10, counter) << "'s digit is ";
+	int digit = integer % 10;
+	cout << digit << endl;
+
+	return 0;
+}

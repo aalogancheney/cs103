@@ -1,0 +1,124 @@
+CSCI 103 Lecture 3 9/3
+
+Announcements:
+
+1. Lab 2 is due on Friday
+2. Homework 1 is due on Thursday
+
+A Few Odds and Ends:
+
+- Comments can be put anywhere in the code
+
+- Variable
+	- When declared they will have "garbage" (basically whatever 
+	  was there previously. 
+	- Always initialize variables if possible
+
+- Scope: What is visible to what parts of a code/program.
+	- Global variables are visible to ALL the code in the program
+	  and are declared outside of any function. That is, any 
+	  function can use them and they will have values.
+	- Local variables are declared inside of a function and that
+	  variable is only visible to that particular function and it
+	  will "die" once the function has concluded.
+
+Function Call Statements:
+
+- C++ predefines a variety of functions for users. Writing the code 
+  every time to compute the sine or cosine of a number would be very
+  tedious.
+- To use a particular function the appropriate library must be #include
+  at the beginning. 
+
+Review:
+
+- Go to http://cs103.usc.edu/websheets/index.php#seconds for a short 
+  review
+
+Control Structures:
+
+- How computers make decisions within programs.
+
+Comparison and Logical Operators:
+
+- Loops and conditional statements require a condition to be evaluated 
+  resulting in a True or False determination.
+- In C/C++
+	- 0 means false
+	- Anything other than 0 means true
+	- The type bool is available to yse
+- Usually, conditions reslut from comparisons
+	- ==, !=, >, <, >=, <=
+
+Logical AND, OR, NOT:
+
+- Often we want to combine several conditions to make a decision
+- AND: &&
+- OR: ||
+- NOT: !
+- Precedence says that the NOT operator (!) executes first, then the
+  AND operator (&&) executes, and finally the OR operator (||) 
+  executes.
+- if(!tomato && !lettuce) {
+  	eat sandwich
+  }
+
+If...Else If...Else
+
+- Use to execute only certain portions of code
+- Else If is optional, and we can have any number of else if statements
+- The final else is optional, although it provides a default scenario
+- Only one section of code can be executed within an if else structure
+
+The Right Style:
+
+- If a case is mutually exclusive it is better form to write an if 
+  else statement rather than two if statements. This would create
+  redundancy and possibly confuse to readers. Regardless of which case
+  is being used each of the if statements will execute.
+
+Switch Statement:
+
+- Learn it on our own. It is used in particular circumstances. 
+
+Loops:
+
+Need for Repetition:
+
+- We often want to repeat a task but we want to do it in a concise way
+- Some examples include:
+	- Print all numbers 1 to 100
+	- Keep taking turns until a game is over
+- It is possible to achieve some results without loops but it is rather
+  tedious and prone to error. 
+
+The while Loop:
+
+- The condition is evaluated first, then the body will execute only if
+  the condition is true. This means it is possible that it doesn't
+  execute.
+- do while ... This is another way to write a loop that ensures the
+  statement will be executed at least once. 
+- The while loop is used when the number of iterations is dependent on
+  some condition that updates during the body of a loop.
+- One way to think of the while loop is that it is a repeating if 
+  statement. 
+- "Until some condition is true" is the same as saying "while some 
+  condition is not true"
+
+The for Loop:
+
+- The initial statement is executed first, and only occurs once
+- The condition is evaluated next
+- The body is only executed if the condition is true
+- Then the update statement is executed
+- The condition is re-evaluated and execution continues until it
+  is false
+- Multiple statements can be in the initial and update statements
+- The for loop should be used when the number of iterations is 
+  independent of the loop body.
+
+We can create equivalent for and while loops:
+
+- Shifting around the syntax we can create the same result using a
+  for loop and a while loop.

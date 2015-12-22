@@ -1,0 +1,105 @@
+CSCI 103: Lecture 11 10/1
+
+Arrays of Pointers:
+
+- We can have arrays of pointers just like we have arrays of other data types.
+- Usually each value of the array is a pointer to a collection of "related" data.
+    - Could be to another array.
+- Recall that this is used in the command line arguments of the main() function. 
+- Review the helloworld program we wrote at the beginning of the class. 
+- When these command line arguments are recieved, they are text strings, not the
+  actual values. Thankfully, we have functions that can make these conversions:
+
+    atoi() [ASCII to Integer]
+    atof() [ASII to float/double]
+
+Dynamic Memory Allocation:
+
+- Very important topic in programming. 
+- I want an array for student scores, but I don't know how many there are until the user 
+  tells me.
+- What size should I declare my array?
+- The following is not supported by all C/C++ compilers:
+
+int num;
+cin >> num;
+int score[num];
+
+- Also, recall local variables die when a function returns.
+- We can allocate memory dynamically (i.e. at run-time).
+    - If we don't know how much we'll need until run-time.
+    - If we want memory to live beyond the end of a function, this is what we have
+      to use. 
+
+Dynamic Memory and the Heap:
+
+- Code usually sits at low addresses.
+- Global variables are somewhere after the code.
+- System stack (memory for each function instance that is alive)
+    - local variables live here.
+
+C Dynamic Memory Allocation:
+
+- malloc(int num_bytes) function in 
+- free
+
+C++ new & delete operators:
+
+- new allocates memory from the heap
+    - Replaces malloc
+    - Followed with the type of the variable you want or an array type declaration.
+        - double *dptr = new double;
+        - int *myarray = new int[100];
+    - Can obviously use a variable to indicate an array size.
+    - Returns a pointer of the appropriate tupe
+        - If you ask for a new int, you get an int * in return
+        - If you ask for a new array (new int[]) you get an int * in return.
+- delete returns memory to heap
+    - Replaces free
+    - Followed by the pointer to the data you want to de-allocate
+        - delete dptr;
+    - use delete [] for arrays.
+        - delete [] myarray;
+
+Dynamic Memory Analogy:
+
+- Dynamic Memory is "ON-Demand Memory"
+- We can think of this as public storage. When you need extra space you can ask for 
+  more space. Also, when you ask for some storage you are given a key and a number
+  for the room.
+- When you don't want to store things anymore and you don't want to pay for the space
+  you have to "delete" your access to it, so that it can now be used by someone else.
+- Also, if you don't return the storage space, and you "forget" where it is, then it
+  never gets used and cannot be used by someone else. 
+
+Dynamic Memory Allocation:
+
+int main(int argc, char *argv[]) {
+    int num;
+
+    cout << "How many student?" << endl;
+    cin >> num;
+
+    int *scores = new int[num];
+    // We can now access scores[0], ..., score[num - 1]
+    delete [] scores;
+    return 0;
+}
+
+Shallow vs. Deep Copy:
+
+Dealing with Text Strings:
+
+- If we have an array of text strings, each element in the array could be of different 
+  sizes, such as the example we have with names. Either we need to account for the worst
+  case and allocate an array that is much larger than we need, or we could use the 
+  new operator to dynamically allocate memory as needed. 
+
+A shallow copy:
+
+- Assigning pointers which makes us have several pointers to the same thing.
+
+A deep copy:
+
+- Make a whole new version of your data by creating a new array. This copies the data
+  being pointed to. 

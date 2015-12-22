@@ -1,0 +1,67 @@
+CSCI 103: Lecture 15 10/15
+
+- For a computer, an algorithm is defined as:
+  - an ordered set of unambiguous steps that can be recreated. 
+- An algorithm is not just a program running something.
+- We can represent algorithms in many different ways, including pseudocode. Good 
+  pseudocode follows many constructions present in programming languages, and it will be
+  fairly easy to read.
+
+An example:
+
+- List all factors of a natural number n.
+- We can naively say that we have to check the numbers from 1 to n. But we don't have to
+  check them all.
+- Another concern is about whether or not particular code is fast, not just based on the
+  machine it runs on. 
+
+Algorithm Time Complexity:
+
+- We judge algorithms based on how long they take to run for a given input size. 
+- Algorithms often have different run-times based on the inpur size.
+  - Different input patterns can lead to best and worst case times.
+  - Average-case times can be helpful, but we usually use worst ase times for comparison.
+
+Big-O Notation:
+
+- Given an input to an algorithm of size n, we can derive an expression in terms of n for 
+  its worst case run time
+- From the expression we look for the dominant term and say that is the big-O (worst-case
+  or upper-bound) run time.
+  - If an algorithm with input size of n runes in n^2 + 10 * n + 1000, we say that it runs
+    in O(n^2) time, because the larger polynomial dominates in the longrun. 
+- Consider the following:
+
+  1: i = 1;
+  1: while(i <= n) {
+  2:   if(remainder of n / i is 0) {
+  1:     List i as a factor of n
+  1:     i = i + 1;
+
+- It takes 5 * n + 1 times to execute based on the input of n. So we say that our program
+  runs on linear time O(n). 
+- Notice that our detailed description wasn't as important as figuring out how many times
+  we had to run through the loop.
+- The most common way to decide the O notation is to look at how many times loops will 
+  execute!
+
+Algorithm Example 2:
+
+- Searching an ordered list (array) for a specific value, k, and return its index or -1 if
+  it is not in the list. 
+- We could use a sequential or linear search, starting at the beginning and moving down
+  the list. 
+  - This would be O(n).
+- Another way to search would be a binary search, i.e. looking at the middle term and decide
+  which half of the list to get rid of. 
+- We want to know how many times the algorithm is going to take to run. 
+
+Sorting:
+
+- If we have an unordered list, sequential search becomes your only choice.
+- If we will perform a lot of searches it may be beneficial to sort the list, then use
+  binary search.
+- Many sorting algorithms of differing complexity
+- Bubble Sort (simple though not very efficient)
+  - On each bass through the list pick up the maximum element and place it at the end of
+    the list. Then repeat using a list of size n - 1.

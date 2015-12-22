@@ -1,0 +1,45 @@
+#include <cmath>
+#include "turtle.h"
+#include "bmplib3.h"
+
+Turtle::Turtle() {
+  currentRow = SIZE/2;
+  currentCol = SIZE/2;
+  currentDir = 0;
+  currentColor = red;
+  drawOn = true;
+}
+
+Turtle::Turtle(double initialRow, double initialCol, double initialDir) {
+  currentRow = initialRow;
+  currentCol = initialCol;
+  currentDir = initialDir;
+  currentColor = red;
+  drawOn = true;
+}
+
+void Turtle::move(double distance) {
+  double startingRow = currentRow;
+  double startingCol = currentCol;
+  currentRow += distance * cos(currentDir * M_PI / 180);
+  currentCol += distance * sin(currentDir * M_PI / 180);
+  if(drawOn) {
+    std_draw_line(currentColor, startingRow, startingCol, currentRow, currentCol);
+  }
+}
+
+void Turtle::turn(double degree) {
+  currentDir += degree;
+}
+
+void Turtle::setColor(color newColor) {
+  currentColor = newColor;
+}
+
+void Turtle::on() {
+  drawOn = true;
+}
+
+void Turtle::off() {
+  drawOn = false;
+}

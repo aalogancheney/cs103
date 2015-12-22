@@ -1,0 +1,169 @@
+CSCI 103: Lecture 22 11/10
+
+Templates:
+
+- We've built a list to store integers
+- But what if we want a list of double's or char's or other objects?
+- Enter C++ Templates
+- Allows the type of a variable to be a parameter specified by the programmer.
+- Compiler will generate separate class/struct code versions for any type 
+  desired (i.e. an instantiated object).
+  
+Vector Class:
+
+- Container class (what it contains is up to you via a template
+- Mimics an array where we have an indezed set of homogeneous objects.
+- Resizes automatically.
+- Declaration:
+
+  vector<int> my_int_vect(5); // creates a vector with ints, called my_int_vect
+  and initially has 5 elements.
+  
+- There are several member functions we can use on vectors:
+
+  push_back()
+  back()
+  front()
+  pop_back()
+  pop_front()
+  begin()
+  erase()
+  insert()
+  size()
+
+Why do we use vectors?
+
+- They are like arrays, but they can grow and shrink based on the needs of the
+  program.
+
+Understanding Performance:
+
+- Vectors are good at some things and worse at others in terms of performance.
+- The Good:
+  - Fast access for random access
+  - Allows for 'fast' addition or removal of items at the back of the vector
+- The Bad:
+  - Erasing and removing items at the front or in the middle (it will have to 
+    copy all items behind the removed item to the previous slot)
+  - Adding too many items (vector allocates more memory than needed to be used
+    for additional push_back()'s... but when you exceed that size it will be
+    forced to allocate a whole new block of memory and copy over every item.
+
+Streams:
+
+I/O Streams:
+
+- '>>' operator used to read data from an input stream
+  - Always skips leading whitespace and stops at first trailing whitespace
+- '<<' operator used to write data to an output stream
+
+Kinds of Streams:
+
+- I/O streams
+- File streams
+
+When Does it Fail:
+
+- For file & eventually stringstreams the stream doesn't fail until it reaches
+  the EOF.
+- Always do the following:
+  1. Try to read the information
+  2. Check if it got the information correctly.
+  3. THEN try to put in the information.
+  
+Recall How to Get Lines of Text:
+
+C++ String getline()
+
+- C++ string library (#include <string>) defines a global function (not a member 
+  of ifstream or cin) that can read a line of text into a C++ string.
+- Prototype: istream& getline(istream &is, string &str, char delim);
+- The text from the input stream will be read up through the first occurrence 
+  of delim and placed into str.. The delimited will be stripped from the end of 
+  str and the input stream will be pointing at the first character after delim.
+- getline(myfile, myLine, optional argument);
+
+stringstreams:
+
+- stringstreams -- contents of a string are the stream of data
+  - #include <sstream> and #include <iostream>
+  - sstream object
+  
+- Use << and >> to convert numbers into strings (i.e. 12345 => "12345")
+
+#include <sstream>
+using namespace std;
+int main() {
+  stringstream ss;
+  int num = 12345;
+  ss << num;
+  
+  string strNum;
+  ss >> strNum;
+  
+  return 0;
+}
+
+- Can parse a string of many values into separate variables
+
+#include <sstream>
+using namespace std;
+int main() {
+  stringstream ss;
+  ss << "2.0 35 a";
+  
+  double x, int y; char z;
+  ss >> x >> y >> z;
+  
+  return 0;
+}
+
+.str()
+
+- Returns a string of everything that is in the string stream.
+
+getline() and stringstreams:
+
+- Imagine someone gives you a file that has a certain format where you know 
+  related data is on a single line of text but aren't sure how many data items
+  will be on that line.
+- Can we use >>?
+  - No it doesn't differentiate between different whitespaces, so it will 
+    skip over the newline character and a space character the same way.
+- We can use getline() to get the whole line, then a stringstream with >> to
+  parse out the pieces. 
+
+int num_lines = 0;
+int total_words = 0;
+
+ifstream myfile(argv[1]);
+
+string myline;
+while (getline(myfile, myline) {
+  stringstream ss(myline);
+  
+  string word;
+  while (ss >> word) {
+    total_words++;
+  }
+  num_lines++;
+}
+
+double avg = (double) total_words / num_lines;
+
+cout << "Average words per line: " << avg << endl;
+
+Choosing an I/O Strategy:
+
+- Is my data delimited by particular characters?
+  - Yes, stop on newlines: Use getline().
+  - Yes, stop on other character: Use getline() with optional 3rd character
+  - No, Use >> to skip all whitespaces and convert to a different data type.
+- If "yes" above, do I need to break data into smaller pieces (vs. just wanting
+  one large string)
+  - Yes, create a stringstream and extract using >>.
+  - No, just keep the string returned by getline().
+- Is the number of items you need to read known as a constant or a variable
+  read in earlier?
+  - Yes, use a loop and extract >> values placing them in an array or vector
+  - No, Loop while extraction doesn't fail placing them in a vector. 

@@ -1,0 +1,111 @@
+#include <iostream>
+#include <fstream>
+#include "maze_io.h"
+
+using namespace std;
+
+/*************************************************
+ * Open the file specified by filename, and read the 
+ * maze into a dynamically allocated array.
+ * 
+ * Return the 2D array pointer (don't delete it..
+ * we'll do that in main() ).  Return NULL if
+ * you are unable to open the file or can't read
+ * the dimensions.
+ *
+ * We also pass in two pointers to integers. Fill 
+ *  the integers pointed to by these arguments
+ *  with the number of rows and columns 
+ *  read by from the file (first two value
+ *  in the file)
+ *
+ *************************************************/
+
+char ** read_maze(char *filename, int *rows, int *cols )
+{
+  // Creates an ifstream variable, and associates that variable 
+  // with the file name given to the function. 
+  ifstream ifile(filename);
+
+  // Here we read in the values for rows and cols from the file
+  // since we know those first two values are going to be the
+  // rows and cols. 
+  ifile >> *rows >> *cols;
+
+  // This statement creates a dynamically allocated array of
+  // char *, with a total number of *rows elements. Then, we use
+  // a for loop to fill each element of the array with a newly
+  // allocated array large enough to fit the cols. We cannot do
+  // the whole thing in one statement, since we have to create 
+  // each element of the array separately. 
+  char **maze = new char *[*rows];
+  for(int i = 0; i < *rows; i++) {
+    *(maze + i) = new char[*cols];
+  }
+  
+  // Here we walk through each element of the array and read the
+  // information into the correct spot. Since we know already that
+  // the right number of rows and cols are given we can simply
+  // assign each element through a for loop. Notice the pointer
+  // notation for reading the information from a file -- we have
+  // to use the dereferencing operator in the right order to 
+  // achieve the desired results. 
+  for(int i = 0; i < *rows; i++) {
+    for(int j = 0; j < *cols; j++) {
+      ifile >> *(*(maze + i) + j);
+    }
+  }
+
+  // The return type of this function is a char **, which is 
+  // the maze array we just filled. 
+  return maze;
+}
+
+/*************************************************
+ * Print the maze contents in a 2D format to the
+ * screen
+ *
+ *************************************************/
+void print_maze(char **maze, int rows, int cols)
+{
+  cout << rows << " " << cols << endl;
+  
+  // Here we are printing the information to the screen based
+  // on the info in the array maze. Each row is printed on
+  // its own row, and the endl statement is reached once
+  // an entire row has been printed. Again, we know that 
+  // the rows and cols variables are correct, so we don't 
+  // have to worry about where they are coming from. 
+  for(int i = 0; i < rows; i++) {
+    for(int j = 0; j < cols; j++) {
+      cout << *(*(maze + i) + j);
+    }
+    cout << endl;
+  }
+}
+
+/*************************************************
+ * Write maze should open the file specified by 
+ * filename and write the contents of the maze
+ * array to the file with the dimensions on the first
+ * line.
+ *
+ *************************************************/
+void write_maze(char *filename, char **maze, int rows, int cols)
+{
+  // This statement creates an ofstream variable and associates
+  // it with the filename given to the function. 
+  ofstream outfile(filename);
+
+  outfile << rows << " " << cols << endl;
+
+  // Here we use the same method as the previous function, but
+  // we want to write the information to a file rather than
+  // to the screen, so we use the outfile variable created here. 
+  for(int i = 0; i < rows; i++) {
+    for(int j = 0; j < cols; j++) {
+      outfile << *(*(maze + i) + j);
+    }
+    outfile << endl;
+  }
+}

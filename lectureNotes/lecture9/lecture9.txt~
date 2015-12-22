@@ -1,0 +1,77 @@
+CSCI 103: Lecture 9 9/24
+
+Passing Multi-Dimensional Arrays to Functions:
+
+- In the formal parameter you must give dimensions of all but the first dimension.
+- The actual parameter is still just the array name.
+- Why do we have to provide all but the first dimension? So that the computer can
+  determine where element array[i][j][k] is actually located.
+
+Linearization of Multidimensional Arrays:
+
+- In a computer, multidimensional arrays must still be stored in memory which is 
+  addressed linearly.
+- C/C++ use a policy that lower dimensions are placed next to each other followed by
+  each higher level dimension. 
+- For a single-dimensional array we have the form int data[10], and we can find element
+  i by the formula: start address + 4 * i. How about for a multidimensional array?
+- Consider the declaration: int x[4][3] // NUMR = 4, NUMC = 3;
+- The formula for the ij-th element is: start address + 4 * (NUMC * i + j)
+- Consider the declaration: int x[2][4][3]; // NUMP = 2, NUMR = 4, NUMC = 3
+- The formula for the ijk-th element is: start address + 4 * (NUMR * NUMC * i + NUMC * j + k)
+
+Revisited: Passing Multi-Dimensional Arrays:
+
+- Must give all dimensions of all but first dimension.
+- This is so that when you use the array name, the computer can determine where in the linear
+  address the individual indices are located. 
+- This will be useful for the next Programming Assignment. 
+
+Color Images:
+
+- To represent a color image, we need a three-dimensional array: two dimensions for the size
+  of the image and one dimension for the RGB values.  
+
+Unit 6: Pointers:
+
+Why Pointers?:
+
+- Consider the scenario: You write a paper and include a lot of large images. You can send the 
+  document as an attachment in the e-mail or upload it as a Google doc and simply e-mail the 
+  URL. What are the pros and cons of sending the URL?
+- There is a significant amount more data that needs to be sent if we use an attachment,
+  but if we give them a reference to the original then they can change that original
+  document. 
+
+Why Use Pointers:
+
+- To change a variable in one function in another function. This requires passing by 
+  reference. 
+- When large data structures are being passed (i.e. arrays, class objects, structures, etc.)
+  it makes sense to pass a reference so the computer doesn't have to copy a bunch of data.
+
+Pointers:
+
+- A fancy word for the address of a variable in memory. 
+- Pointers point to things, and things can be several things, including pointers. 
+
+C++ Pointer Operators:
+
+- Two operators used to manipulate pointers in C and C++: & and *
+- &variable evaluates to the address of the variable. This means you get a pointer to 
+  something by writing &something.
+- *pointer evaluates to the data pointed to by a pointer.
+- & and * are essentially inverse operations. 
+    - We saw & returns a reference/address of some value while * dereferences the address
+      and returns the value
+    - &value = address
+    - *address = value
+    - *(&value) = value
+
+
+
+
+
+
+
+

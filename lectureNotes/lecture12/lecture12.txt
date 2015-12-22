@@ -1,0 +1,108 @@
+CSCI 103: Lecture 12 10/6
+
+Shallow Copy: When you assign one pointer to another. All this means is that the two pointers 
+will point to the same thing, i.e. you are not copying the information stored at that 
+location. In the end, you will have two pointers that, when dereferenced, will give you the 
+same value. 
+
+Deep Copy: Copying data being pointed to into a new memory location. 
+
+File I/O:
+
+I/O Streams:
+
+- I/O is placed in temporary buffers/streams by the OS and C++ libraries.
+- cin pulls data from an input stream known as stdin (standard input).
+  - It is usually the stream coming from the keyboard
+- The object cin will pull information from the input stream as needed.
+- cout puts data in an output stream known as stdout (standart output).
+  - This is usually directed to the display.
+- '>>' operator used to read data from an input stream, and it always stops at white space.
+- '<<' operator used to write data to an output stream.
+  - 'endl' forces a flush. A flush forces the OS to move data from the internal OS stream to 
+    the actual output device (like the monitor). This forces the OS to put whatever
+    is in the output stream onto the monitor. Without the endl command, we may not see
+    our output. 
+
+File I/O Intro:
+
+- Right now we have two methods of getting data from users:
+  - cin
+  - Command line (argc, argv).
+- We want to get input from a file. This is called File I/O.
+- The primary method for a program to read/write files is called file streams.
+- OS-based tools to read-write file data
+  - I/O redirect
+  - Pipes.
+
+Redirection and Pipe Examples:
+
+- Refer to slides for an example to download from the ee.usc.edu website. 
+- ./programName < file.txt
+  - This redirects the contents of file.txt and puts it into standard in, the input stream
+    that C++ uses to get information and put it into the program. 
+- Use '>' for output redirection to a file, and '<' for input redirection from a file. 
+- Use '|' for pipelining information from one program to another. 
+- This will deactivate the argc and argv arguments for main().
+
+Input and Output Streams:
+
+- Therea re other types of input and output streams other than cin and cout. 
+- File streams give teh same capabilities of cin and cout except data is read/writen from/
+  to files.
+
+Getline() and Lines of Text:
+
+- cin stops reading at whitespace
+  - If you want to read a whole line of text, we use cin.getline().
+  - cin.getline(char *buffer, int max_chars)
+  - Reads max_chars - 1 leaving space for the null character. 
+  - It will read everything up to a newline character. 
+
+Sample Code:
+
+- Get the sample code here:
+  - wget http://ee.usc.edu/~redekopp/cs103/cinfail.cpp
+- Use cin.fail() to check if our input attempt fails or succeeds. This can be used to make
+  sure the user enters the correct type of information. 
+- When cin.fail() is true, C++ will remember that input failed at some point. We have to 
+  reset the cin object using the clear() member function by typing cin.clear(). This will
+  reset cin, but the bad information is still in the input stream. 
+- To fix this problem we can use the ignore() member function on cin, which takes two 
+  arguments: a base number of characters to clear, or a particular input such as the newline
+  character.
+
+Understand Input Streams:
+
+- cin skips leading newline characters, and stops at trailing whitesapce. 
+
+File Streams:
+
+Computer Organization:
+
+- Processor can only talk directly to RAM. 
+  - It needs "translation" to access data on the hard drive or other disk.
+- All code and data resides in RAM.
+  - All variables accessible in your program.
+- How do we access files?
+  - The OS provides routines to perform the translation.
+- C++ cannot talk directly to the hard drive, but we have C++ code that can act as a
+  middleman to get information from a file. 
+
+Starting File I/O:
+
+- Just like any application that uses files, we have two options:
+  - Read info from the file (like an 'Open' command)
+    - Use an 'ifstream' object to open the file.
+    - Read data from the file.
+    - Close it when you are done.
+  - Write info to the file (like a 'Save' command)
+    - Use an 'ostream' object to write to a file. 
+
+Important Fact:
+
+File Stream: 
+
+- We can use command line arguments to pull information from different files. 
+
+

@@ -1,0 +1,142 @@
+CSCI 109: Lecture 20 11/3
+
+Classes:
+
+- Fuse together data and objects.
+- Once inside member functions, there is no need to use the dot operator. 
+
+Class Pointers:
+
+- Can declare pointers to these new class types.
+- Use -> operator to access member functions. This dereferences a pointer to
+  an object and it gets a member of that object.
+
+What Makes A Function Unique?
+
+- The name, return type, and the number/types of arguments. 
+
+Multiple Constructors:
+
+- Recall, constructors are called when an object is declared, and it used to 
+  initialize an object.
+- Can have multiple constructors with different arguments. 
+
+Public and Private and Structs vs. Class:
+
+- In C++ the only difference between structs and classes is structs default 
+  to public access, classes default to private access.
+- Thus, other code (non-member functions of the class) cannot access private
+  class members directly.
+
+Accessor / Mutator Methods:
+
+- Define public "get" (accessor) and "set" (mutator) functions to let other
+  code access desired private data members.
+- Use 'const' after argument list for accessor methods. 
+- Good practice is to make data members of a class private, and define functions
+  that allow users to interact with those pieces of data. 
+- Another convention is to name data members with unique names, and to do this
+  we might want to use an underscore before the variable name or another 
+  identifying method that differentiates where the data is. 
+  
+Analogy:
+
+- Natural analogy when we have a set of items that can change is to create 
+  a list.
+  - Write down what you know now
+  - Can add more items later (usually to the end of the list)
+  - Remove (cross off) others when done with them. 
+- In this way, the lists grow and shrink
+  
+NULL Pointer:
+
+- Just like there was a null character in ASCII = '\0' whose value was 0...
+- There is a NULL pointer whose value is 0.
+  - NULL is "keyword" you can use in C/C++ that is defined to be 0.
+  - Used to represent a pointer to "nothing"
+  - Nothing ever lives at the address 0 of memory so we can use it to mean
+    "pointer to nothing" 
+- int *pts = NULL; // ptr has 0 in it now.
+- if(ptr != NULL) {...} // it's a good pointer.
+
+Arrays Review:
+
+- Arrays are contiguous pieces of memory
+- To find a single value, a computer only needs
+  - The start address
+  - Which element we want
+  - This is because memory is stored contiguously in memory
+  - If we know integer elemtn i is at location 108, do we know where element
+    i + 1, then the next element is at location 112 (for integers).
+- In a linked list, not everything is contiguous. 
+
+Limitations Of Arrays:
+
+- Arrays cannot be resized easily.
+- We can dynamically allocate arrays once we know their size, but they are
+  difficult to resize later.
+  
+Linked Lists:
+
+- A linked list stores values in separate chunks of memory (i.e. dynamically
+  allocated object).
+- Since they are stored separately, we need to know where the next element 
+  is stored. 
+- Each item in the list stores the value and a pointer to the next item in
+  the list. The NULL pointer will signify the end of a linked list. 
+- We need a pointer that will point to the first object in the list. That 
+  pointer is used to access the other objects in the list. 
+- We can allocate more or delete old ones as needed so we only use memory as
+  needed. 
+  - When doing this we have to do some bookkeeping with pointers to make sure
+    they are pointing to the right information. 
+
+Linked List:
+
+- Use structures/classes and pointers to make 'linked' data structures.
+- List
+  - Arbitrarily sized collection of values.
+  - Can add any number of new values via dynamic memory allocation
+  - Usually supports the following set of operations:
+    - Append ("push_back")
+    - Prepend ("push_front")
+    - Remove back item ("pop_back")
+    - Remove front item ("pop_front")
+    - Find (look for particular value)
+- Rule of thumb: Still use structs for objects that are purely collections of 
+  data and don't really have operations associated with them. Use classes when 
+  data does have associated functions/methods. 
+- Going to an item in a linked list takes more work since we have to visit
+  each item to get to the next one.
+
+struct Item {
+  int value;
+  Item *nextItem;
+};
+
+class List {
+  public:
+    List();
+    ~List();
+    void push_back(int v); ...
+  private:
+    Item *head;
+};
+
+- To get the value from head, we need to write *head->val, or (*head).val, and
+  to get the next value, we write head->next.
+- To keep moving down the list we have to continue using arrow syntax, as in
+  head->next->val, or head->next->next->val
+  
+Important Note:
+
+- Head is NOT an actual Item struct; it is just a pointer.
+- Head is just a pointer
+  - It is special in that it is the only thing that is not actually hodling any data... it just points at the first data-filled struct
+  - head->next actually points to the second item, not the first because ht ehead already points to another item. 
+  
+  
+  
+  
+  
+  

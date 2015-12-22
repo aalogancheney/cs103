@@ -1,0 +1,41 @@
+8
+0
+	Mark Redekopp
+	1978
+	90018
+	1 2 5 
+1
+	Marquis Lee
+	1990
+	90271
+	0 2 
+2
+	Tommy Trojan
+	1885
+	90089
+	0 1 
+3
+	Max Nikias
+	1945
+	91103
+	4 
+4
+	Jane Doe
+	1988
+	90007
+	3 
+5
+	Aaron Cheney
+	1990
+	91007
+	0 
+6
+	Bob Cheney
+	1942
+	91006
+	
+7
+	Lebron James
+	1985
+	90210
+	

@@ -1,0 +1,134 @@
+CSCI 103: Lecture 23 11/12
+
+C++ Classes Related Topics
+
+UML (Unified Modeling Language):
+
+- Shows class definitions in a language-agnostic way
+- Shows class hierarchy (inheritance, etc.)
+- Each class shown in one box with three sections:
+  - Class Name, Member functions, then Data members
+  - Precede function/data member with +(public), -(private), #(protected)
+  - Functions show name with arguments : return type
+  - Data members show name : type
+
+C++ References
+
+Swap Two Variables
+
+- Classic example of issues with local variables
+  - Write a function to swap two variables
+- Pass-by-value doesn't work
+  - Copy is made of x, y from main and passed to x, y of swapit(). Swap is 
+    performed on the copies of the variables. 
+- To get around this problem, we pass arguments by reference. 
+  - We use the addresses of memory to directly handle the information.
+  
+C++ Reference Variables
+
+- So you want a function to actually modify a vairable from another function 
+  but you don't like pointers and they confuse you?
+  - Too bad, we should know how.
+  - But we can use C++ reference variables. 
+
+Using C++ Reference Variables
+
+- Do declare a reference variable, we use the & operator in a declaration
+- Behind the scenes the compiler will access the variable with a pointer
+- But you get to access it like a normal variable without dereferencing
+- Think of a reference variable as an alias. 
+
+When to Use References
+
+- When you want to make changes to the actual variables in the calling function.
+- You can work with the actual values, not copies of the values. 
+- You should also do this when you don't want to copy a bunch of variables. 
+
+const Arguments:
+
+- If we want to pass by reference, but we don't want to modify the argument, 
+  we can use a const argument to indicate the function cannot modify the
+  data. 
+- The compiler will throw an error. 
+
+Vector/Deque/String Suggestions
+
+- When you pass a vector, deque, or even C++ string to a function a deep copy 
+  will be made which takes time
+- Copies may be desirable in a situation to make sure the function alter your 
+  copy of the vector/deque/string.
+- But passing by const reference has all of the benefits AND it saves time. 
+
+Singly-Linked List Review:
+
+- Singly-linked lists have a head that points to the beginning of the list, and
+  we have to move down the list to access members.
+- But what if we have a pointer to somewhere in the middle of the list? Can we
+  go backwards? No, because we have no information about previous members
+  of the list.
+
+Doubly-Linked Lists
+
+- These are the same as singly-linked lists, but they have an additional
+  component (pointer) that points back to the previous item in the list. 
+- The first item's previous field should be NULL. The last item's next field
+  should be NULL. 
+- When we insert items into the list, this requires a bit more bookkeeping 
+  since we have to change where items point in front and behind them. 
+
+Deques and Their Implementation
+
+Understanding Performance
+
+- Recall that vectors are good at some things and worse at others in terms of
+  performance.
+- Vectors are good because we can quickly add or remove items from the 
+  back of the vector, and they are good at accessing a random element from the
+  vector.
+- Vectors are bad because erasing/removing items from the front or the middle
+  takes a lot of time, and adding too many items will take a lot of information
+  and time to copy the information.
+
+Deque Class
+
+- Stands for double-ended queues and they should allow for efficient (fast)
+  additions and removals from either end (front or back) of the list. 
+
+Deque Class:
+
+- Similar to vector but allows for push_front() and pop_front() options
+- Useful when we want to put things in one end of the list and take them 
+  out of the other. 
+- We use #include <deque> at the top to do this, and we declare them by saying
+  deque<int> variableName; to make a deque variable. 
+- Overhead makes accessing an element using indexing more difficult, but adding
+  and removing items from the front of the list are O(1). 
+
+Deque Implementation
+
+- Let's consider how we can implement a deque. We might do this with a singly-
+  linked list. 
+- To do this, we can add a tail index to our class so we can keep track of the
+  front and back of the list. 
+- But using a singly-linked list means that we cannot delete items effectively 
+  from the back of the list.
+- The final implementation should use a doubly linked list. 
+
+One Last Point
+
+- If we implemented a deque with a doubly-linked list, it would not be easy to
+  access an element in the middle of the list, becuase we still have to walk
+  down the list to get to that item.
+- The C++ Deque class actually uses a circular array to implement a deque, 
+  which is something we will learn later in another class.
+  
+Destructors
+
+- These are functions that are called when an element goes out of scope. 
+- This is useful, because in our doubly linked class we only have one (maybe 
+  two items) that point to the front of the list. When that object goes out of
+  scope, it is deleted, but not the data it pointed to. 
+- A destructor allows us to destroy memory when an object goes out of scope.
+
+
+

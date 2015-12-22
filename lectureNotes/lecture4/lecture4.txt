@@ -1,0 +1,68 @@
+CSCI 103: Lecture 4 9/8
+
+The for Loop:
+
+- The initializing statement is executed first
+- The condition is evaluated next
+- The body is only executed if the condition is true
+- The update statement is then executed
+- The condition is re-evaluated and the execution continues until it is false
+- Multiple statements can be in the initialization and update statements
+- As a rule of thumb: use the for loop when the number of iterations is independent of the 
+  loop body. This is an example of a definite loop. 
+
+for(init stmt; cond; update stmt)
+{
+	// loop body
+}
+
+- The for loop is used to calculate a set amount of numbers. 
+- Writing out the code in tables is often useful when starting to program. 
+- There are always multiple ways to construct a for loop. Just do it in such a way that it
+  makes sense. 
+
+The Loops that Keep On Giving:
+
+- It is very possible to make a loop that does not terminate, and it will happen. When it 
+  does happen, press ctrl-c to stop a running program. 
+- Always increment properly, and watch out for the difference between comparisons
+  and assignment operations. 
+- Try explaining the program to yourself in plain English, and often any mistakes will
+  pop up. 
+
+Getting All The Inputs:
+
+- This is an alternative way to make a loop read information continuously:
+
+while(cin >> value) {
+	...
+}
+
+- The object cin can get input, but it also checks whether or not input is valuable. 
+- Users are always going to do something stupid, so it is good practice to checking
+  if input is good. 
+
+Single Statement Bodies:
+
+- It is possible to write loops without braces so long as there is only one statement, but
+  this is bad practice. Always use braces when writing code. The braces make the code 
+  readable and easier to modify later. 
+
+Nested Loops:
+
+- An inner loop will execute fully through every iteration of the outside loop. This is most 
+  useful when processing arrays and 2-D data. 
+
+Randomness:
+
+- The first programming assignment deals with random numbers, so we have to generate random
+  numbers within a computer. 
+- The library we need to use is cstdlib, and the function is rand(). We should also include
+  the ctime library so that we can use the time() function, and then when we use time(0) it
+  will pull the current time as stored in the system. This will help to generate truly
+  random numbers.
+- We could use RAND_MAX (the internal number for the system that indicates the largest 
+  possible integer number) to generate a random number within a particular range we want. 
+- A few methods are moding by 2 to test for even or odd, or we could decide whether the 
+  randomly generated number is within the first or second half; there are several ways 
+  to do this.  

@@ -1,0 +1,144 @@
+CSCI 103: Lecture 19 10/29
+
+Objects:
+
+- Ways of grouping data and functions together.
+- C uses structures (struct) and C++ uses classes (class), although these
+  things are the same.
+- We can put many things together into a structure or class to group things
+  nicely together.
+- The dot operator lets us get a particular element of a structure or class.
+- We can create pointers to structs, just like we create pointers to other 
+  variable types.
+- To use pointers, we have to be very careful with syntax and parentheses. To
+  get around this we can use the arrow operator (->) to get rid of the need
+  for parentheses. 
+  
+Passing Objects as Arguments:
+
+struct Point {
+  int x;
+  int y;
+};
+
+void print_point(Point myp) {
+  cout << "(x, y) = " << myp.x << ", " << myp.y;
+  cout << endl;
+}
+
+int main() {
+  Point p1;
+  p1.x = 2; p1.y = 5;
+  print_point(p1);
+  
+  return 0;
+}
+
+- In C, arguments have to be a single value.
+- By default, objects are passed by value to functions.
+
+Returning Objects:
+
+- We can return structures from a function. We cannot return an array, but we
+  can return a structure. 
+  
+Object-Oriented Programming:
+
+- We can model software as a set of objects that interact with each other, and
+  thinking about it this way lets us abstract and encapsulate the code.
+- Objects put together data and functions.
+- Objects are the primary method for encapsulation and abstraction. 
+  - Encapsulation hides details from a user
+  - Abstraction allows us to think about our design rather than the actual code.
+
+C++ Classes:
+
+- classes are the programming construct used to define objects, their data 
+  members, and methods/functions
+- Similar idea to structs
+- Steps:
+  - Define the class data members and function/method prorotypes
+  - Write the methods.
+  - Put things in a private and public section.
+  - Instantiate/Declare object variables and use them by calling their method.
+- A constructor function has the same name as the name of the class, and it
+  is used to initialize variabes of the class type. 
+- Terminology:
+  - Class = Definition / Blueprint of an object.
+  - Object: Instance of the class, that uses actual allocation of memory.
+  
+class Deck {
+  public:
+    Deck();
+    int get_top_card();
+  private:
+    int cards[52];
+    int top_index;
+};
+
+Deck::Deck() {
+
+}
+
+int Deck::get_top_card() {
+  
+}
+
+- Classes are the programming construct used to define objects, their data 
+  members, and methods/functions.
+- Similar idea to structs
+- Steps:
+  - Define the class' data members and function/method prototypes (usually in
+    a separate header file).
+  - Write the methods (usually in a separate .cpp file)
+  - Instantiate/Declare object variables and use them by calling their methods.
+- deck.h has the blueprint
+- deck.cpp has the definitions of the the methods/functions
+- Other .cpp file has the program with main().
+
+Constructors / Destructors:
+
+- Constructor is a function of the same name as the class itself.
+  - It is called automatically when the object is created (either when declared
+    or when allocated via new).
+  - Use to initialize your object (data members) to desired initial state
+  - RETURNS NOTHING!
+- Destructor is a function of the same name as the class itself, with a '~' in
+  front.
+  - Called automatically when object goes out of scope (i.e. when it is 
+    deallocated by delete or when scope completes).
+  - Use to free/delete any memory allocated by the object
+  - RETURNS NOTHING
+  - We don't have a good use for this now, but we will...
+
+Class Definition:
+
+- class name {...};
+- Each function or data member can be classified as public, private, or 
+  protected.
+  - These classifications support encapsulation by allowing data/method
+    members to be inaccessible to code that is not part of the class
+  - Ensure that no other programmer writes code that uses or modifies your
+    object in an unintended way.
+  - private: Can call or access only by methods/functions that are part of that
+    class.
+  - public: Can call or access by any other code.
+  - protected: More on this later...
+- Everything is private by default; if we want something to be public, then we
+  have to use the keyword "public:" to do so.
+- Make the interface public and the guts/inner-workings private.
+- Good practice is to make data members private and the methods public. 
+
+Calling Member Functions:
+
+- Member functions are called by preceding their name with the specific 
+  object that it should operate on.
+- d1.shuffle() indicates the code of shuffle() should be operating implicitly
+  on d1's data member vs. d2 or any other Deck object. 
+  
+Difference Between Class and Struct:
+
+- By default, everything in a class is private.
+- By default, everything in a struct is public.
+- We use struct, historically, for objects that only need data members, and 
+  if we need to do operations we use classes. 

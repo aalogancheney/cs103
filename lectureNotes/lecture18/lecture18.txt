@@ -1,0 +1,163 @@
+CSCI 103: Lecture 18 10/27
+
+PA3:
+
+- We need 4 structures: 
+  - The maze
+  - The predecessor array
+  - The BFS queue
+  - A structure that knows where we have visited
+
+Objects, Structures, and Strings:
+
+- So far we have been talking about things that are in the C language. Now we are going to
+  move on to C++ specific tools
+
+Objects:
+
+Types and Instances:
+
+- A type indicates how much memory will be required, what the bits mean (i.e. data vs. 
+  address), and what operations can be performed. 
+- The type int is represented with 32 bits, and it represents only integer values. The type
+  also says what operations we can do.
+- The type char * is also represented with 32 bits, but we can do different things on
+  it from a type int.
+- A variable or object is an actual instantiation of a type.
+
+Abstract Data Types:
+
+- Often times we want to represet abstract things (beyond integer, character, or double)
+  - Some examples: a pixel, a circle, a student
+- Often these abstract types can be represented as a collection of integers, character
+  arrays/strings, etc.
+- Objects (realized as structs in C and later classes in C++) allow us to aggregate different 
+  type variables together to represent a larger thing as well as supporting operations
+  on that thing. 
+
+Objects:
+
+- Objects contain:
+  - Data members: data needed to model the object and track its state/operation
+  - Methods/functions: code that operates on the object, modifies it
+- Example: Deck of cards:
+  - We need to track the number of cards, the type of cards, where the top of the stack is.
+  - We want to shuffle, deal, cut.
+
+Structs vs. Classes:
+
+- Structs (originated in teh C language) are the predecessors of classes (C++ language)
+  - Though structs are still valid in C++
+- Classes form the basis of object-oriented programming in the C++ language
+
+Object-Oriented Programming:
+
+- Model the application/software as a set of objects that interact with each other. 
+- We use functions for a form of this, where the function breaks down a smaller problem.
+- Objects fuse data and functions that operate on that data into one item
+- Objects become the primary method of encapsulation and abstraction:
+  - Encapsulation: 
+    - Hiding of data and implementation details
+    - Only expose a well-defined interface to anyone wanting to use our object
+  - Abstraction:
+    - How we decompose the problem and think about our design rather than the actual code. 
+- We use objects to build from the ground up.
+
+C Strings:
+
+- In C, strings are:
+  - Character arrays
+  - Terminated with a Null character
+  - Passed by reference/pointer to functions
+
+C++ Strings
+
+- C++ provides a string class that abstracts all those details and encapsulates all the 
+  code to actually handle:
+  - Memory allocation, deep copy, comparison, etc.
+- We are now able to use the string class whenever we want.
+
+Object Syntax Overview:
+
+- ifstream and string are already objects.
+- Can initialize at declaration by passing initial value in (), known as a CONSTRUCTOR
+- Use the dot operator to call an operation (function) on an object or access a data value.
+- Some special operators can be used on certain object types (+, -, [], etc.) but you have
+  to look them up. 
+
+String Examples:
+
+- Must:
+  - #include <string>
+  - using namespace std;
+- Size/Length of string:
+  - string1.length(), or string1.size()
+- Get C string equiv:
+  - string1.c_str() will return a char *
+- Find a substring
+- Go to websheets circ_shift
+
+Structs:
+
+Definitions and Instances (Declarations):
+
+- Objects must first be defined/declared (as a 'struct' of 'class')
+  - The declaration is a blueprint that indicates what any instance should look like
+  - Identifies the overall name of the structure and its individual component
+    types and names.
+  - The declaration does not actually create a variable.
+  - Usually appears outside any function.
+- Then any number of instances can be created/instantiated in your code.
+  - Instances are actual objects created from the definition
+  - Delcared like any other variable.
+
+Membership Operator:
+
+- Each variable (and function) in an object definition is called a "member" of the object
+- When declaring an instance/variable of an object, we give the entire object a name, but 
+  the individual members are identified with the member names provided in the definition.
+- We use the . (dot/membership) operator to access that member in an instance of the 
+  object.
+
+Memory View of Objects:
+
+- Each instantiation allocates the necessary memory for the structure, contiguously in
+  memory.
+
+Object Assignment:
+
+- When we declare a variable of the type we created, the information located there is
+  garbage, so we need to initialize it.
+- It is also possible to copy one structure variable to another structure. The single
+  assignment statement copies all of the information to another variable, which can 
+  help us with initializing many structures.
+
+Pointers to Objects:
+
+- We can declare pointers to objects just as with any other variable. 
+- A pointer always takes the address of a variable, which takes the same amount of space
+  as any other pointer, no matter what it points to. 
+
+Accessing members from a pointer:
+
+- Can dereference the pointer first then use the dot operator.
+- Dereferencing a structure object gets us the entire object it points to, so we have to
+  use the dot operator to access any particular element. 
+- Structures and objects are different from arrays in this way.
+- The dot operator has higher precedence than the dereferencing operator. 
+
+The Arrow Operator:
+
+- We can use the arrow pointer in place of the dereferencing operator and parentheses.
+- Using the student structure, we can do the following:
+
+student stu1;
+student *stu_pointer;
+stu_pointer = &stu1;
+(*stu_pointer).id // give us the id member of the student object pointed to by stu_pointer
+stu_pointer->id // gives us the same result as above. 
+
+
+
+
+

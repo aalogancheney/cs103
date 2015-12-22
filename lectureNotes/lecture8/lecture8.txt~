@@ -1,0 +1,26 @@
+CSCI 103: Lecture 8 9/22
+
+Multidimensional Arrays:
+
+- So far we have thought of arrays as 1-dimensional arrays. But we can use multiple
+  dimensions for arrays, such as in:
+
+    int myArray[2][3];
+
+- There is no limit to the number of dimensions we can do with this. It is up to us to
+  decide how we want to process the array. 
+
+Multi-File Programs:
+
+- We need a way to split our code into many separate files so that we can partition our 
+  code.
+- We often are given code libraries from other developers or companies.
+- It can also help to put groups of related functions into a file.
+- bmplib.h has prototypes for functions to read, write, and show .BMP files as well as
+  constant declarations. 
+- A header file usually has function prototypes and constant declarations. 
+
+Array Information:
+
+- Recall that the name of an array, when passed to a function, is the address of the 
+  first element in the array. 

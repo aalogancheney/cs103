@@ -1,0 +1,161 @@
+CSCI 103: Programming Assignment 1, Going Broke, Fall 2014
+
+Name: Aaron Cheney
+
+Email Address: acheney@usc.edu
+
+NOTE: You can delete the questions, we only need your responses.
+
+=============================== Prelab =======================================
+
+1. How will you generate a coin-toss outcome for each player? (i.e. map the 
+random number returned by rand() to a Heads/Tails outcome)
+
+Response 1: First, the output of rand() needs to be normalized to fall between 
+0 and 1. I will do this by dividing the output of rand() by RAND_MAX, and cast 
+the value to a double (since integer division would almost always yield 0). Then, 
+I will seed rand() using the srand() function and time(0) from the header file 
+ctime. It is sufficient at that point to continually call rand() -- we only need 
+to seed once! The last part is deciding which values correspond to heads and 
+tails. A simple comparison will do, since we ask the user for the probability 
+of heads between 0 and 1 as an input. Comparing each output of rand() to the 
+user-entered probability will tell us whether or not a particular flip gives 
+heads or tails. Also, it is not necessary to distinguish between heads or tails,
+since the probability will be symmetric around 0.5. All we care about is who has
+the "odd" outcome. 
+
+2. Based on the coin-toss outcome for each player, what cases do you need to 
+check for to decide how to do the coin bookkeeping? What logical 
+connectors do you use?
+
+Response 2: We need to check if all outcomes are the same (i.e. each flipped coin 
+is heads or tails), and if not we need to find the one that is different. With 
+three players there are 8 cases to consider, two of which require no action. The 
+case when all of the players have the same result can be found by using AND over 
+all three flips (which will be 1 if all players have heads) and OR over all three 
+flips (which will be 0 if all players have tails). The hard part is figuring out 
+who has something different. First, I will check if the two non-action cases are 
+met in order to rule those out. Once those two cases are ruled out, we can make 6 
+other cases to check who has the different coin. The "odd" coin can be either heads 
+or tails. If the odd coin is heads, then the OR of the other two flips will give 0. 
+If the odd coin is tails, then the AND of the other two flips will give 1. Making 
+6 cases will tell us exactly who has the odd coin. 
+
+3. Is the number of iterations/turns that a single game requires known a priori
+(which simply means "beforehand" but is used quite often in computer 
+science speak). What kind of loop should then be used and what is its 
+terminating condition?
+
+Response 3: No, the number of iterations is not known beforehand, which means we 
+should use a while loop. The terminating condition occurs when any one of the 
+players runs out of coins. This condition is found by using AND across the number
+of coins of each player. 
+
+4. What data needs to be maintained for the total simulation (i.e. across 
+several games)? What type?
+
+Response 4: The only piece of information we need to track across multiple games 
+is how many turns have happened over all games. This is going to be of type int, 
+since we cannot have a fractional turn. And since we know the total number of 
+simulations from the user input, all we have to do is divide the running sum by 
+the total number of games played. To make sure our average shows the correct 
+fractional part, I will make the total number of simulations type double, so 
+that when we divide we get the right result without using static_cast. 
+
+5. Is the number of iterations for the total simulations known before entering 
+the loop? What kind of loop should then be used?
+
+Response 5: Yes, the total number of simulations are known beforehand: they are 
+entered by the user. Therefore we should use a for loop.
+
+6. Also, consider the case that somehow the players all use unfair (possibly 
+weighted) coins that come up as heads with probability, p. We will start by 
+simulating fair coins where p=0.5. Assuming that for fair coins (p=0.5) we 
+calculate x number of flips per game. How will the number of flips per game 
+change if p = 0.1? Will it stay the same or go up or down and how 
+dramatically? Think about this scenario and write a sentence of two
+explaining your prediction and your reasoning before starting to code your 
+solution.
+
+Response 6: As the probability of heads approaches either 0 or 1, the length of 
+the game should take significantly longer than if the probability was balanced. 
+The reason for this is because it will be much less likely for players to have 
+the "odd" coin and it will happen infrequently. Additionally, when it does happen 
+it is as likely to happen to one players as another, thus the coins will be 
+exchanged between the players for a longer period of time. 
+
+====================== Data from Procedure Step 6 ==========================
+
+This table shows a range of values for 10 simulations of the given conditions. 
+
+coins |  p  |   n    | output
+------------------------------
+  3   | 0.5 | 5      | 4.4 - 5.0
+  3   | 0.5 | 10     | 4.4 - 6.0
+  3   | 0.5 | 50     | 4.38 - 5.3
+  3   | 0.5 | 100    | 4.82 - 5.38
+  3   | 0.5 | 1000   | 4.964 - 5.137
+  3   | 0.5 | 10000  | 5.0826 - 5.1678
+  3   | 0.5 | 100000 | 5.12891 - 5.16184
+ 
+====================== Data from Procedure Step 7 ==========================
+
+This table shows a range of values for 10 simulations of the given conditions. 
+
+coins |  p  |   n    | output
+------------------------------
+  3   | 0.1 | 10000  | 14.1454 - 14.3662
+  3   | 0.2 | 10000  | 7.9422 - 8.0707
+  3   | 0.3 | 10000  | 6.0204 - 6.104
+  3   | 0.4 | 10000  | 5.3251 - 5.3991
+  3   | 0.5 | 10000  | 5.1255 - 5.1979
+  3   | 0.6 | 10000  | 5.2909 - 5.3638
+  3   | 0.7 | 10000  | 6.0888 - 6.1577
+  3   | 0.8 | 10000  | 8.0094 - 8.0984
+  3   | 0.9 | 10000  | 14.2352 - 14.4018
+
+================================== Review ===================================
+
+1. For your first data set, what, in your opinion, is the "point of 
+diminshing returns" where the extra time waiting for the simulation 
+is not worth the increased accuracy?
+
+Response 1: The 10000 mark gets the accuracy within 0.05 turns of the range for 
+the 100000 mark. This, to me, gives the best trade-off between the time spent 
+waiting for the program to calculate the results and the accuracy of the results. 
+Also, it may be of interest to note that I did not notice any visual delay from 
+entering the input to receiving the output until the 100000 mark. When entering 
+the 100000 turn test case There was a slight, but noticible, delay. 
+
+2. Examine your results as p varies in your second data set.
+Do these results match your expectations of the behavior of the average 
+number of flips as p approaches 0 or 1?
+
+Response 2: Yes, the data set matches very well to my expected behavior. The 
+sharp increase in the time it takes to play the game is symmetric around the fair 
+behavior of a coin with probability 0.5. 
+
+3. When we examined the effects of varying p, why did we start at 0.1 and end 
+at 0.9 rather than starting at 0.0 and ending at 1.0?
+
+Response 3: If we had started at 0.0 and ended at 1.0, the program would have 
+never terminated, because no one would ever throw the odd coin. In other words, 
+because of the way I set my flip() function it would never give any case other 
+than the players all having heads or all having tails. 
+
+================================ Remarks ====================================
+
+Filling in anything here is OPTIONAL.
+
+Approximately how long did you spend on this assignment?
+
+: 2.5 hours
+
+Were there any specific problems you encountered? This is especially useful to
+know if you turned it in incomplete.
+
+: No
+
+Do you have any other remarks?
+
+: No

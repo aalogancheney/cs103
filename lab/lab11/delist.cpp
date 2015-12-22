@@ -1,0 +1,144 @@
+#include <cstddef>
+#include "delist.h"
+
+// The constructor initializes the head and tail to NULL, since there are no
+// items in the list yet. 
+DEList::DEList() {
+  head = NULL;
+  tail = NULL;
+}
+
+// The destructor uses the pop_front() function to remove items from the list
+// while the list is not empty. The destructor is easy to write, since we are
+// using other member functions to make this destructor. 
+DEList::~DEList() {
+  while(!empty()) {
+    pop_front();
+  }
+}
+
+// Checks to see if the list is empty, which is the same as saying the head
+// is pointing to a NULL position (could have equally used the tail in this
+// case).
+bool DEList::empty() {
+  if(head == NULL) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Finds the size of the list by walking through the list and keeping track
+// of a counter. The empty() member function is called to decide if the list 
+// is empty, in which case we return 0, otherwise perform the counter
+// loop. 
+int DEList::size() {
+  if(empty()) {
+    return 0;
+  } else {
+    int counter = 0;
+    DEItem *tempHead = head;
+    while(tempHead!= NULL) {
+      tempHead = tempHead->next;
+      counter++;
+    }
+    return counter;
+  }
+}
+
+// Returns the front value from the list, but will return -1 if the list is
+// empty. 
+int DEList::front() {
+  if(empty()) {
+    return -1;
+  } else {
+    return head->val;
+  }
+}
+
+// Returns the back value from the list, but will return -1 if the list is
+// empty.
+int DEList::back() {
+  if(empty()) {
+    return -1;
+  } else {
+    return tail->val;
+  }
+}
+
+// Adds a new value to the end of the list. The two cases to check are:
+// 1. The list is empty.
+//    Then both the head and tail point to the newly created item, and the
+//    next and previous fields are set to NULL.
+// 2. The list is non-empty 
+//    The only values that need to change are the head and the previous
+//    first element in the list. 
+void DEList::push_front(int new_val) {
+  DEItem *temp = new DEItem;
+  if(empty()) {
+    head = temp;
+    tail = temp;
+    head->val = new_val;
+    head->next = NULL;
+    head->prev = NULL;
+  } else {
+    temp->next = head;
+    temp->prev = NULL;
+    temp->val = new_val;
+    head->prev = temp;
+    head = temp;
+  }
+}
+
+// This function is the same as the one above, but it is adding an item to 
+// the back of the list. 
+void DEList::push_back(int new_val) {
+  DEItem *temp = new DEItem;
+  if(empty()) {
+    head = temp;
+    tail = temp;
+    head->val = new_val;
+    head->next = NULL;
+    head->prev = NULL;
+  } else {
+    tail->next = temp;
+    temp->next = NULL;
+    temp->prev = tail;
+    temp->val = new_val;
+    tail = temp;
+  }
+}
+
+// This function removes an item from the front of the list. The strange case
+// that needs to be considered is when there is only one item in the list, in 
+// which case the head and tail both need to be set to NULL.
+void DEList::pop_front() {
+  if(empty()) {
+    return;
+  } else if(size() == 1) {
+    delete head;
+    head = NULL;
+    tail = NULL;
+  } else {
+    DEItem *temp = head;
+    head->next->prev = NULL;
+    head = head->next;
+    delete temp;
+  }
+}
+
+// Same as above, but for the back item.  
+void DEList::pop_back() {
+  if(empty()) {
+    return;
+  } else if(size() == 1) {
+    delete tail;
+    head = NULL;
+    tail = NULL;
+  } else {
+    DEItem *temp = tail;
+    tail->prev->next = NULL;
+    tail = tail->prev;
+    delete temp;
+  }
+}

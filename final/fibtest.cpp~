@@ -1,0 +1,12 @@
+#include <iostream>
+#include "fib.h"
+
+using namespace std;
+
+int main(int argc, char *argv[]) {
+  Fibonacci fib;
+  cout << fib.get_next() << endl;
+  cout << fib.get_next() << endl;
+
+  return 0;
+}

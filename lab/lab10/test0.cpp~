@@ -1,0 +1,8 @@
+#include "bigint.h"
+using namespace std;
+
+int main() {
+   BigInt myInt("1234403");
+   myInt.println();
+   return 0;
+}

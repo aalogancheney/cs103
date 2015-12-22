@@ -1,0 +1,115 @@
+CSCI 103: Lecture 16 10/20
+
+Recursion:
+
+- Recursion and Dynamic Memory / Pointers are the topics we should know the most when
+  going to CSCI 104
+- Defining an object, mathematical function, or computer function in terms of itself.
+- In other words, we will be defining functions that call themselves. 
+- GNU stands for GNU is not Unix. We can ad infinitum to this.
+- When writing computer programs we have to write functions that stop somewhere.
+
+- Problem in which the solution can be expressed in terms of itself (usually a smaller 
+  instance / input of the same problem) and a base / terminating case.
+- Usually takes the place of a loop.
+- Input to teh problem must be categorized as a:
+  - Base case: Solution known beforehand or easily computable (no recursion needed)
+  - Recursive case: Solution that can be described using solutions to smaller problems
+    of the same type.
+- Factorial is an example:
+  - n! = n * (n - 1) * (n - 2) * ... * 2 * 1
+  - n! = n * (n - 1)!, (n - 1)! = (n - 1) * (n - 2)!, etc.
+- Think of recursion like Inception: You have to visit each level to get back to the top
+
+Recursive Functions:
+
+- Recall the system stack essentially provides separate areas of memory for each
+  instance of a function
+- Thus each local variable and actual parameter of a function has its own value within 
+  that particular function instance's memory space.
+- This means that every time we call the function it has its own place on the stack.
+- The downside to recursion is that it takes more time and it takes more space on the 
+  stack, but sometimes the tradeoff is worth it because of how easy it is to write
+  recursively. 
+
+Head vs. Tail Recursion:
+
+- Head Recursion: Recursive call is made before the real work is performed in the function
+  body.
+- Tail Recursion: Some work is performed and then the recursive call is made. 
+- Here are two cases:
+
+Tail Recursion:
+
+void doit(int n) {
+  if(n == 1) cout << "Stop";
+  else {
+    cout << "Go" << endl;
+    doit(n - 1);
+  }
+}
+
+This will show:
+
+Go
+Go
+Stop
+
+Head Recursion:
+
+void doit(int n) {
+  if(n == 1) cout << "Stop";
+  else {
+    doit(n - 1);
+    cout << "Go" << endl;
+  }
+}
+
+This will show:
+
+StopGo
+Go
+
+Here is a practice problem:
+
+http://cs103.usc.edu/websheets/index.php?auth=Google&start=kettles#kettles
+
+Recursion Double Check:
+
+- When you write a recursive routine:
+  - Check that you have an appropriate base case.
+    - Need to check for these first before recursive case.
+  - Check that each recursive call makes progress toward the base case.
+    - Otherwise you'll get an infinite loop and stack overflow.
+  - Check that you use a return statement at each level to return appropriate values back
+    to each recursive call.
+    - You have to return back up through every level of recursion.
+
+Loops and Recursion:
+
+- Any problem that can be done with loops can be done with recursion.
+- We use recursion when it produces simple, elegant code that is easy to read.
+- Loops are faster, but they can often be complicated to code. 
+- Picking which method to use comes down to preference. 
+
+Another Example:
+
+- We want to write a recursive algorithm that prints all of the possibilities for binary
+  combinations based on the number of bits we want to print. 
+
+Programming Assignment 3:
+
+- We are going to write a program that navigates through a maze. 
+- We have to use some file I/O to get information into the program.
+- On the first line we will have two integers, which give the dimensions of the maze.
+- After that, there will be a certain number of rows and how many characters are on 
+  each line. 
+- A . means an empty spot, a # is a wall, S signifies the start, and F signifies the end. 
+- In the end we are going to output to a file with the shortest path through the maze,
+  by replacing the periods with asterisks. 
+- Assume there are walls around the boundarie. 
+- The code is going to be broken down into different files.
+- maze.cpp will have all main and the maze_search() functions.
+- maze_io.cpp will handle the other parts we need to take care of, such as reading the 
+  maze from a file, printing the file to the screen, and writing the maze to a file. 
+- Our checkpoint is to get the three functions listed above working, using file I/O.

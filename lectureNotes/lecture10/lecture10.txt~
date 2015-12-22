@@ -1,0 +1,93 @@
+CSCI 103: Lecture 10
+
+Pointer Questions:
+
+int x, y;
+int* p = &x;
+int* q = &y;
+x = 35; y = 46;
+p = q;
+*p = 78;
+cout << x << " " << y << endl;
+cout << *p << " " << *q << endl;
+
+What will we see?
+
+- 35 78
+- 78 78
+
+- We can do arithmetic on pointers. So we could write something like p + 1, which would give
+  us the address of the next integer following the pointer p. C++ will interpret this by
+  taking the size of the information stored at p, and add that to the pointer p. Thus, if
+  the value at p stores an int, then p + 1 = address of p + 4 bytes. 
+
+Pointer Arithmetic and Array Indexing:
+
+- Array indexing and pointer arithmetic are very much related.
+- Array syntax: data[i].
+    - This says get the i-th value from the start of the data array.
+- When we write the name of an array, we get a pointer to the type of the array. The name of
+  an array is a pointer. It follows we should be able to do pointer arithmetic. 
+- data[i] is a shortcut for writing *(data + i). Inside the parentheses we are doing pointer
+  arithmetic, and the * dereferences the value to give us the value at data[i].
+
+Arrays & Pointers:
+
+- These have a unique relationship.
+- Array names evaluate to the start address of the array
+    - This means that the name of an integer array has type: int*.
+    - The name of character array has type: char*.
+- Array indexing is the same as pointer arithmetic. 
+
+Pass by Value vs. Pass by Reference:
+
+- To pass a value by reference, use &value in the argument of a function. In the prototype
+  of a function that handles pointers we have to use pointer notation for the formal
+  arguments in the function. 
+
+Swap Two Variables:
+
+- This is a classic example. We want to write a function that swaps two variables. 
+- Passing by value doesn't work because we are working with copies of the variables. 
+- To accomplish this we have to work with references. We use the & operator to pass the 
+  address of a variable to a function, and in the function prototype we have to indicate that
+  we are working with pointers. 
+- To do this with a function, we cannot use pass by value -- it's impossible -- so we have
+  to pass by reference. 
+
+Passing Arrays as Arguments:
+
+- When we declare functions that handle arrays we can prototype with a few options:
+
+void add1ToArrayOf10(int []);
+void add1ToArray(int *, int);
+
+- Recall that passing the name of an array is like passing a pointer, so in this case we are
+  passing with a pointer to the value that is stored in the array. 
+- We have to also then pass the size of the array because C does not keep track of
+  the size of arrays. It will be happy to let us index past the size of the array. 
+
+Pointers to Pointers:
+
+- We can have multiple levels of indirection.
+- Using C/C++ pointer terminology, we can do things like:
+
+  **int
+
+  which is easier to think about if we write *(*int), which dereferences a pointer, so we 
+  expect a pointer to a pointer to an int. 
+
+Pointers Can Point to Pointers Can Point to ...
+
+- This is like a chain of links. 
+- Consider the example:
+
+int k, x[3] = {5, 7, 9};    // This gives an integer k and an array of 3 integers x
+int *myptr, **ourptr;       // This gives a pointer to an int myptr, and a pointer to a 
+                            // pointer to an int outptr
+myptr = x;                  // the pointer to int points to the first element of x
+ourptr = &myptr;            // outptr is set to the address of myptr, which points to the
+                            // address of the first element of the array x
+k = *myptr;                 // sets the integer k to the value in myptr, which is 5
+k = (**ourptr) + 1;         // sets the integer k to 6
+k = *(*outptr + 1);         // sets the integer k to 7

@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int fib(int n, vector<int>& memory);
+
+int main(int argc, char *argv[]) {
+  vector<int> memory;
+  
+  cout << fib(3, memory) << endl;
+  cout << fib(6, memory) << endl;
+
+  return 0;
+}
+
+int fib(int n, vector<int>& memory) {
+  if(memory[n] != 0) {
+    return memory[n];
+  }
+  
+  if(n == 1 || n == 2) {
+    memory.push_back(1);
+  } else {
+    memory.push_back(fib(n - 1, memory) + fib(n - 2, memory));
+  }
+  return memory[n];
+}

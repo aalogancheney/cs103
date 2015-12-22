@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(int argc, char *argv[]) {
+  int length;
+  string string1("CS 103");
+  string string2 = "fun";
+
+  string2 = "really fun";
+
+  cout << string1 << " is " << string2 << endl;
+  string2 = string2 + "!!!";
+  cout << string2 << endl;
+
+  string string3(string1);
+  
+  if(string1 == string3) {
+    cout << string1 << " is the same as " << string3;
+    cout << endl;
+  }
+
+  cout << "First letter is " << string1[0];
+  cout << endl;
+
+  return 0;
+}

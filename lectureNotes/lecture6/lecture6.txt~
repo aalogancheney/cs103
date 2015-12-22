@@ -1,0 +1,91 @@
+CSCI 103: Lecture 6 9/15
+
+Functions:
+
+- Also called procedures or methods
+- Do a task given some inputs (but we don't care how it does it). In other words, it is a 
+  black box object.
+- Collection of code that performs a task
+	- Has a name to identify it 
+	- Takes in 0 or more inputs
+	- Performs computation
+	- Returns at most a single value (potentially zero values as well)
+	- The return value is substituted for the function call
+
+Execution of a Function:
+
+SAMPLE CODE:
+
+#include<iostream>
+using namespace std;
+
+int max(int a, int b)
+{
+	if (a > b) {return a;}
+	else {return b;}
+}
+
+int main()
+{
+	... 
+}
+
+- Statements in a function are executed sequentially by default. 
+- Define a function once, but we can call it over, and over, and over, ...
+- Functions can call other functions, and when that function is called execution moves to 
+  that function, and when that function is finished execution returns to the previous function.
+- The return value is substituted in place of the function call. 
+
+Parameter Passing:
+
+- Formal parameters, a and b 
+	- They indicate the type of data they expect, and they are the names that will be 
+	  used internal to the function.
+- Actual parameters:
+	- Actual values input to the function code by the caller
+	- A COPY is made and given to function. Even formal parameters with the same name
+	  as an actual parameter are different things. For the sake of avoiding errors,
+	  always use different variable names from function to function. 
+
+Program Decomposition:
+
+- C is a procedural language
+	- Main unit of code organization, problem decomposition, and abstraction is the 
+	  "function" or "procedure".
+	- Function or procedure is a unit of code that:
+
+To Decompose a Program:
+
+- Think of the program in plain English, and isolate the verbs; usually the verbs are going
+  to be the functions in a program. 
+
+Anatomy of a Function:
+
+-  Return type
+-  Function name
+-  Input arguments
+-  Code
+-  Non-void functions must have a return statement
+
+Function Prototypes:
+
+- The compiler g++ needs to know about a function before it can hangle a call to that function.
+- The compiler will scan a file from top to bottom.
+- If it encounters a call to a function before the actual function code it will not compile.
+- A function prototype will ensure this doesn't happen. On a large software project, we would
+  have to ensure that the functions are listen in an order that will make sense to a compiler
+  because functions can call other functions. A function prototype negates all of this. 
+
+Overloading: A Function's Signature
+
+- What makes up a signature (uniqueness) of a function
+	- Name
+	- The number and type of arguments
+- No two functions are allowed to have the same signature, i.e. they cannot have the same name,
+  number and types of arguments. 
+- A return type does not make a function unique.
+- Two functions with the same name are said to be overloaded. This is the power of functions, 
+  we can write several functions with the same name that do similar things based on the 
+  input types. 
+
+Pulling out code from main() and putting it into a function is called "factoring". This technique may be very useful later when programming. If some statements show up in main() a lot, it may be best to pull out those statements and substitute a function in place. 

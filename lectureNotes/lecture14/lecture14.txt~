@@ -1,0 +1,45 @@
+CSCI 103: Lecture 14 10/13
+
+Getting Lines of Text:
+
+- Using the >> operator to get an input string of text will stop at the first whitespace.
+- Sometimes we want to get a whole line of text including spaces. 
+  - cin.getline(char *buf, int bufsize);
+  - ifile.getline(char *buf, int bufsize);
+  - Reads max of bufsize - 1 characters (including newline).
+- Look at Activity 12 for practice with file I/O.
+
+Recall: cin (and cin objects declared as an istream variable) skip leading whitespaces
+and stops and trailing whitespaces. 
+
+File Location:
+
+File Access:
+
+- Think about a file location as a VHS tape.
+- Internally, in the istream object, there is a file pointer that keeps track of where we
+  are in the file. 
+- EOF (end-of-file) or other error means no more data can be read. Use the good() 
+  member function to ensure file pointer is ok or read/write operation succeeded. 
+- The EOF will trigger the fail bit. 
+- If we want to keep white spaces, we can use the get() member function, which does not
+  skip whitespaces. Therefore we can get the information from a file using something 
+  like ifile.get() to get the next character in the file. 
+
+Changing File Pointer Location:
+
+- seekg() and tellg() (g stands for get). 
+- seekg() says "go to a particular location"
+- tellg() will return the number of characters you have gone.
+- seekg(int, ios_base::x);
+
+To get the size of a file, we can do the following:
+
+ifstream myfile("stuff.txt");
+myfile.seekg(0, ios_base::end);
+int size = myfile.tellg();
+
+x:
+  ios_base::beg = position from beginning of file
+  ios_base::cur = relative to current location
+  ios_base::end = position relative from end of file

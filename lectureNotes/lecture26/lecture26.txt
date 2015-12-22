@@ -1,0 +1,8 @@
+CSCI 103: Lecture 26 11/24 
+
+We want a way to write the Fibonacci sequence recursively. 
+
+We can use the technique called memoization, where we remember the results
+of previous calculations. 
+
+

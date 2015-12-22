@@ -1,0 +1,15 @@
+Notes on the lab:
+
+strcpy(): This is a function that takes two pointer arguments, copying the source string to the destination string. The formal declaration of the function is as follows:
+
+char * strcpy(char * destination, const char * source);
+
+One of the downsides to using this function is that if the source pointer doesn't have a null character to terminate the copying, the program can begin to write over other information. This can lead to security risks and oerwrite side effects, a bad thing! The next function 
+
+strncpy(): This is an improvement over the above function because it takes a third parameter in its formal arguments: the maximum size of information to be written. The formal declaration of the function is as follows:
+
+char * strncpy(char * destination, const char * source, size_t num);
+
+If the null character in the souce array has been reached before the num value, then the destination array will be padded with 0's. If the maximum number of elements to be copied has been reached before the null character in the source array, the function strncpy() does NOT implicetly add a null character. Reading the information this way is dangerous, as it can lead to overflow. After running the function call it is important to make sure there is a terminating null character where appropriate. 
+
+For each of the functions above, the return value is a destination.  

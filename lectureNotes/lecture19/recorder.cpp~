@@ -1,0 +1,41 @@
+#include <string>
+#include <iostream>
+using namespace std;
+
+class recorder {
+  public:
+    recorder(string initialMessage);
+    string playback();
+    void record(string newMessage);
+  private:
+    string savedMessage;
+};
+
+// Normally, this would go in recorder.cpp
+// This is the constructor.
+recorder::recorder(string initialMessage) {
+  savedMessage = initialMessage;
+}
+
+// Accessor: get back the saved message.
+string recorder::playback() {
+  return savedMessage;
+}
+
+// Mutator: replace saved message.
+void recorder::record(string newMessage) {
+  savedMessage = newMessage;
+}
+
+int main(int argc, char *argv[]) {
+  recorder r("hello");
+  cout << "The recorded message is: " << r.playback() << endl;
+  cout << "Let's play it again:     " << r.playback() << endl;
+  r.record("bonjour");
+  cout << "The changed message is:  " << r.playback() << endl;       
+  recorder card("happy birthday!");
+  cout << "The new recorder says:   " << card.playback() << endl;       
+  cout << "The old one still says:  "  + r.playback() << endl;
+  
+  return 0;
+}

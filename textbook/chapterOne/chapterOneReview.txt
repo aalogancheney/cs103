@@ -1,0 +1,112 @@
+R1.1 Explain the difference between using a computer program and programming a computer.
+
+Using a computer does not require knowledge about programming the computer to do anything. To use a computer, you only have to understand how to use the applications. To program a computer, you have to understand the steps to programming. When programming a computer, you are telling it how to do things it doesn't already know how to do.
+
+R1.2 Which parts of a computer can store program code? Which can store user data?
+
+Program code can be stored in primary or secondary memory. When a computer is turned off, a program's code is stored in secondary memory. When a computer is on and an application is launched the program's code is then copied to primary memory so that the program can fun and be used. User data is stored in secondary storage as this information is not (generally) intended to be edited. 
+
+R1.3 Which parts of a computer serve to give information to the user? Which parts take user input?
+
+The display, speakers, and printer all give information to the user. The keyboard, mouse/trackpad, and microphone all accept information from users. 
+
+R1.4 A toaster is a single-function device, but a computer can be programmed to carry out different tasks. Is your cell phone a single-function device, or is it a programmable computer?
+
+Most every cell phone is now a computer. It is designed to do several things and it can be programmed to do many different things. 
+
+R1.5 Explain two benefits of using C++ over machine code. 
+
+C++ is standardized so a programmer does not have to look up the machine codes for different processors. Machine code consists simply of a list of instructions; using C++ allows programmers to tackle a problem in several different ways.
+
+R1.6 On your own computer or on your lab computer, find the exact location (folder or directory name) of
+a. The sample file hello.cpp (after you saved it in your development environment).
+b. The standard header file <iostream>
+
+a. The sample file hello.cpp was stored on the current working directory.
+
+b. NOT SURE REVISIT THIS 
+
+R1.7 What does this program print?
+
+#include <iostream>
+using namespace std;
+int main(int argc, char *argv[])
+{
+	cout << "6 * 7 = " << 6 * 7 << endl;
+	return 0;
+}
+
+The program outputs the following: 6 * 7 = 42
+
+R1.8 What does this program print?
+
+#incude <iostream> 
+using namespace std;
+int main(int argc, char *argv[])
+{
+	cout << "Hello" << "World" << endl;
+	return 0;
+}
+
+The program outputs the following: HelloWorld
+
+R1.9 What does this program print?
+
+#include <iostream>
+using namespace std;
+int main(int argc, char *argv)
+{
+	cout << "Hello" << endl << "World" << endl;
+	return 0;
+}
+
+The program outputs the following:
+
+Hello
+World
+
+R1.10 Write three versions of the hello.cpp program that have different compile-time errors. Write a version that has a run-time error.
+
+Error 1: Incorrect spelling:
+
+#include <iostream>
+using namespace std;
+int Main()	// Should be main(), not Main().
+{
+	cout << "Hello World." << endl;
+	return 0;
+}
+
+Error 2: Forgotten semicolon:
+
+#include <iostream>
+using namespace std;
+int main()
+{
+	cout << "Hello world." << endl	// Missing semicolon
+	return 0;
+}
+
+Error 3: Omitting the correct header files:
+
+#include <iostream>
+
+int main()
+{
+	cout << "Hello world." << endl;
+	return 0;
+}
+
+Run-time error: Misspelled word:
+
+#include <iostream>
+using namespace std;
+int main(int argc, char *argv[])
+{
+	cout << "Hallow, World." << endl;
+	return 0;
+}
+
+R1.11 How do you discover compile-time errors? How do you discover run-time errors?
+
+Compile-time errors are found for you by the compiler. If a particular program does not compile, then there is a compile-time error somewhere in the code. Run-time errors are trickier: the programmer must test the executable code thoroughly to ensure that there are no mistakes. A compiler is happy to create a code that does nothing useful -- as long as there are no compile-time errors.

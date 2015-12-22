@@ -1,0 +1,107 @@
+CSI 103: Lecture 21 11/5
+
+Linked List:
+
+- Use structures/classes and pointers to make linked data structures.
+- List
+  - Arbitrarily sized collection of values.
+  - Can add any number of new values via dynamic memory allocation
+  - Usually supports the following set of operations
+    - Append ("push_back")
+    - Prepend ("push_front")
+    - Remove back item ("pop_back")
+    - Remove front item ("pop_front")
+    - Find (look for particular value)
+    
+Templates:
+
+- We've build a list to store integers. 
+- But what if we want a list of double's or char's or other objects?
+- We would have to define the same code but with different types, which
+  wastest time! 
+- Templates will let us do this. 
+
+- Allows the type of variable to be a parameter specified by the programmer. 
+
+template <typename T>
+struct Item {
+  T val;
+  Item<T> *next;
+};
+
+template <typename T>
+class List {
+  public:
+    List();
+    ~List();
+    void push_back(T newval); ...
+  private:
+    Item<T>;
+};
+
+int main() {
+  List<int> my_int_list();
+  List<double> my_dbl_list();
+}
+
+C++ STL:
+
+- This is known as the Standard Template Library
+
+Vector Class:
+
+- Container class (what it contains is up to you via a template)
+- Mimics an array where we have an indexed set of homogenous objects.
+- Resizes automatically
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+  vector<int> my_vec(5);
+  for(unsigned int i = 0; i < 5; i++) {
+    my_vec[i] = i + 50;
+  }
+  my_vec.push_back(10); my_vec.push_back(8);
+  my_vec[0] = 30;
+  unsigned int i;
+  for(i = 0l i < my_vec.size(); i++) {
+    cout << my_vec[i] << " ";
+  }
+  cout << endl;
+  
+  int x = my_vec.back();
+  x += my_vec.front();
+  cout << "x is " << x << endl;
+  my_vec.pop_back();
+  
+  // These lines insert/remove from the middle of the vector. 
+  my_vec.erase(my_vec.begin() + 2);
+  my_vec.insert(my_vec.begin() + 1, 43);
+  
+  return 0;
+}
+
+Vector Suggestions:
+
+- If you don't provide an initial size to the vector, you must add items using
+  push_back().
+- When iterating over the items with a for loop, use an unsigned int.
+- When adding an item, a copy will be made to add to the vector, so in this
+  way vectors are not very efficient at what they do. They save us interface
+  trouble, but that means there is more work going on behind the scenes. 
+  
+PA4:
+
+- Already posted online, and it's due in 2 weeks. 
+- We are going to write an application that mimics a social network. It will
+  store users and information about their relationships.
+- For the last part of the assignment we are going to write code that allows
+  us to make interesting queries about the relationships, such as 
+  suggesting friends. 
+- We are going to write a User class that keep tracks of a person, their
+  information, and their friends. 
+- We will be using a file for input, similar to how we did the maze programming
+  assignment. 

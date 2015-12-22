@@ -1,0 +1,31 @@
+CSCI 103: Lecture 17 10/22
+
+Sorting:
+
+- If we have an unordered list, sequential search becomes our only choice
+- If we will perform a lot of searches it may be beneficial to sort the list, then
+  use binary search
+- Many sorting algorithms of differing complexity
+- Bubble sort (simple, but not efficient)
+  - On each pass through the list, pick up the maximum element and place it at the end
+    of the list. Then repeat using a list of size n - 1 (i.ei, without the newly
+    placed maximum value).
+
+Recursive Sort (Merge Sort)
+
+- Break sorting problem into smaller sorting problems and merge the results at the end.
+- Mergesort(0..n-1)
+  - If list is size 1, return
+  - Else
+    - Mergesort(0..n/2)
+    - Mergesort(n/2+1..n-1)
+    - Combine each sorted list of n/2 elements into a sorted n-element list.
+- This sorting algorithm works on the order of O(n.log(n)).
+
+Flood Fill:
+
+- Given a pixel:
+  - Base case: if it is black already, stop!
+  - If the pixel is white, change it to black
+  - If you go out of bounds, stop! (This is a second, hidden base case we need to consider).
+- Look at the floodfill.cpp file in this directory to find it. 
